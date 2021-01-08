@@ -24,7 +24,7 @@ import java.util.Collections;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Deck
+public class Deck //Cards to choose from.
 {
 
     private final ArrayList<Card> cards;

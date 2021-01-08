@@ -16,50 +16,21 @@
  */
 package uk.ac.tees.cis2001.pocketbeasts;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author James Fairbairn
- * @author Steven Mead
+ * @author w9101532
  */
-public class InPlay //Cards placed on "table".
-{ 
+public abstract class CyberDecorator extends Card
+{
+    protected Card c;
 
-    private final ArrayList<Card> cards;
-
-    public InPlay()
+    public CyberDecorator(Card c)
     {
-        this.cards = new ArrayList<>();
+        this.c = c;
     }
-
-    public ArrayList<Card> getCards()
+    
+    public int getDamage()
     {
-        return cards;
-    }
-
-    public Card getCard(int index)
-    {
-        return cards.get(index);
-    }
-
-    public void add(Card card)
-    {
-        this.cards.add(card);
-    }
-
-    public void remove(Card card)
-    {
-        this.cards.remove(card);
-    }
-
-    public void removeAll(ArrayList<Card> cards)
-    {
-        this.cards.removeAll(cards);
-    }
-
-    public int count()
-    {
-        return this.cards.size();
+        return this.c.getAttack() + this.getAttack();
     }
 }

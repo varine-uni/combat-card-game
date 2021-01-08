@@ -27,7 +27,6 @@ import java.util.Scanner;
  */
 public class Main
 {
-
     public static ArrayList<Card> getStarterDeck()
     {
         ArrayList<Card> starterDeck = new ArrayList<>();
@@ -100,8 +99,7 @@ public class Main
 
         Player[] players = new Player[]
         {
-            new Player("James", new Deck(getStarterDeck())),
-            new Player("Steve", new Deck(getStarterDeck()))
+           //TODO: Add classes here, with their respective starter decks.
         };
 
         for (Player player : players)

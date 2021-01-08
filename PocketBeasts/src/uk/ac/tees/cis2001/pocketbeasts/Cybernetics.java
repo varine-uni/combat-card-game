@@ -35,6 +35,5 @@ public class Cybernetics extends Card
     }
     
     int c_Damage; //Cybernetic damage, if there is any.
-    BodyPart c_BodyPart; //Body part selection.
-    
+    BodyPart c_BodyPart; //Body part selection.  
 }

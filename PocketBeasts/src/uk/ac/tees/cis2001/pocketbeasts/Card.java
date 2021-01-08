@@ -30,9 +30,9 @@ public abstract class Card implements Comparable<Card>
     private final int attack = 0;
     private int health = 0;
 
-    public Card()
+    public Card(Card card)
     {
-
+        card.getAttack();
     }
 
     public String getId()
