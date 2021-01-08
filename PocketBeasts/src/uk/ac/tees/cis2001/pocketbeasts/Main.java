@@ -27,20 +27,20 @@ import java.util.Scanner;
  */
 public class Main
 {
-    public static ArrayList<Card> getStarterDeck()
-    {
-        ArrayList<Card> starterDeck = new ArrayList<>();
-
-        for (int i = 0; i < 2; i++)
-        {
-            for (Card card : STARTER_CARDS)
-            {
-                starterDeck.add(new Card(card));
-            }
-        }
-
-        return starterDeck;
-    }
+//    public static ArrayList<Card> getStarterDeck()
+//    {
+//        ArrayList<Card> starterDeck = new ArrayList<>();
+//
+//        for (int i = 0; i < 2; i++)
+//        {
+//            for (Card card : STARTER_CARDS)
+//            {
+//                starterDeck.add(new Card(card));
+//            }
+//        }
+//
+//        return starterDeck;
+//    }
 
     public static String getPrompt(String prompt, String[] validResponse)
     {

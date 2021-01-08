@@ -19,6 +19,8 @@ package uk.ac.tees.cis2001.pocketbeasts;
 /**
  *
  * @author w9101532
+ * 
+ * Basic starter card.
  */
 public class ImpCard extends Card implements Killable
 {

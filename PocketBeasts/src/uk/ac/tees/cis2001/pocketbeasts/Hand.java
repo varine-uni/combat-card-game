@@ -23,8 +23,10 @@ import java.util.Collections;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * 
+ * Current cards in your hand.
  */
-public class Hand //Current cards in your hand.
+public class Hand
 { 
 
     private final ArrayList<Card> cards;

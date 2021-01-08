@@ -23,8 +23,10 @@ import java.util.Collections;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * 
+ * Cards to choose from.
  */
-public class Deck //Cards to choose from.
+public class Deck
 {
 
     private final ArrayList<Card> cards;

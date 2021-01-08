@@ -22,8 +22,10 @@ import java.util.ArrayList;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * 
+ * Cards that die go here.
  */
-public class Graveyard //Cards that die go here.
+public class Graveyard
 {
     
     private final ArrayList<Card> cards;

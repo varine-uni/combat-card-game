@@ -22,8 +22,10 @@ import java.util.ArrayList;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * 
+ * Cards placed on "table".
  */
-public class InPlay //Cards placed on "table".
+public class InPlay
 { 
 
     private final ArrayList<Card> cards;
