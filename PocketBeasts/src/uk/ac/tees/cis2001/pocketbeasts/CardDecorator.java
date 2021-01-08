@@ -21,9 +21,10 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author w9101532
  */
 public abstract class CardDecorator extends Card
-{    
+{
+
     protected Card c;
-    
+
     public CardDecorator(Card c)
     {
         this.c = c;

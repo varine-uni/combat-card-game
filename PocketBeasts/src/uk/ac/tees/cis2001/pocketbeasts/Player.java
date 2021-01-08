@@ -21,7 +21,8 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Player {
+public class Player implements Killable
+{
     
     private final int MAX_MANA = 9;
     
@@ -152,5 +153,11 @@ public class Player {
         sb.append(this.hand.toString());
         
         return sb.toString();
+    }
+
+    @Override
+    public void death()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

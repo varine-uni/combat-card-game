@@ -23,35 +23,43 @@ import java.util.ArrayList;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class InPlay {
-    
+public class InPlay
+{ //Cards placed on "table"
+
     private final ArrayList<Card> cards;
 
-    public InPlay() {
+    public InPlay()
+    {
         this.cards = new ArrayList<>();
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<Card> getCards()
+    {
         return cards;
     }
-    
-    public Card getCard(int index) {
+
+    public Card getCard(int index)
+    {
         return cards.get(index);
     }
-    
-    public void add(Card card) {
+
+    public void add(Card card)
+    {
         this.cards.add(card);
     }
-    
-    public void remove(Card card) {
+
+    public void remove(Card card)
+    {
         this.cards.remove(card);
     }
-    
-    public void removeAll(ArrayList<Card> cards) {
+
+    public void removeAll(ArrayList<Card> cards)
+    {
         this.cards.removeAll(cards);
     }
-    
-    public int count() {
+
+    public int count()
+    {
         return this.cards.size();
     }
 }

@@ -24,74 +24,89 @@ import java.util.Collections;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Hand {
-    
+public class Hand
+{ //Current cards in your hand.
+
     private final ArrayList<Card> cards;
 
-    public Hand() {
+    public Hand()
+    {
         this.cards = new ArrayList<>();
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<Card> getCards()
+    {
         return this.cards;
     }
-    
-    public void add(Card card) {
+
+    public void add(Card card)
+    {
         this.cards.add(card);
         this.sort();
     }
-    
-    public void remove(Card card) {
+
+    public void remove(Card card)
+    {
         this.cards.remove(card);
     }
-    
-    public void removeAll(ArrayList<Card> cards) {
+
+    public void removeAll(ArrayList<Card> cards)
+    {
         this.cards.removeAll(cards);
     }
-    
-    public int count() {
+
+    public int count()
+    {
         return this.cards.size();
     }
-    
-    public void sort() {
+
+    public void sort()
+    {
         Collections.sort(this.cards);
     }
 
     @Override
-    public String toString() {
-        
+    public String toString()
+    {
+
         StringBuilder sb = new StringBuilder();
-        
-        for (int i=0; i<this.count(); i++) {
+
+        for (int i = 0; i < this.count(); i++)
+        {
             sb.append("+-------+ ");
         }
         sb.append("\n");
-        
-        for (Card card : this.cards) {
+
+        for (Card card : this.cards)
+        {
             sb.append(String.format("|%7d| ", card.getManaCost()));
         }
         sb.append("\n");
-        
-        for (Card card : this.cards) {
+
+        for (Card card : this.cards)
+        {
             sb.append(String.format("|  %-5s| ", card.getId()));
         }
         sb.append("\n");
-        
-        for (int i=0; i<this.count(); i++) {
+
+        for (int i = 0; i < this.count(); i++)
+        {
             sb.append("|       | ");
         }
         sb.append("\n");
-        
-        for (Card card : this.cards) {
+
+        for (Card card : this.cards)
+        {
             sb.append(String.format("|%-2d %4d| ", card.getAttack(), card.getHealth()));
         }
         sb.append("\n");
-        
-        for (int i=0; i<this.count(); i++) {
+
+        for (int i = 0; i < this.count(); i++)
+        {
             sb.append("+-------+ ");
         }
         sb.append("\n");
-        
+
         return sb.toString();
     }
 }

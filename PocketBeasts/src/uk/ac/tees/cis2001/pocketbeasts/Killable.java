@@ -16,30 +16,11 @@
  */
 package uk.ac.tees.cis2001.pocketbeasts;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author James Fairbairn
- * @author Steven Mead
+ * @author w9101532
  */
-public class Graveyard //Cards that die go here.
+public interface Killable
 {
-    
-    private final ArrayList<Card> cards;
-
-    public Graveyard() 
-    {
-        this.cards = new ArrayList<>();
-    }
-    
-    public void add(Card card) 
-    {
-        this.cards.add(card);
-    }
-    
-    public int count() 
-    {
-        return this.cards.size();
-    }
+    public void death();
 }

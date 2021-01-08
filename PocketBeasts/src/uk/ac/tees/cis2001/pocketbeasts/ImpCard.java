@@ -20,7 +20,15 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class ImpCard extends Card
+public class ImpCard extends Card implements Killable
 {
+
+    Graveyard grave;
+    
+    @Override
+    public void death()
+    {
+        grave.add(this);
+    }
     
 }

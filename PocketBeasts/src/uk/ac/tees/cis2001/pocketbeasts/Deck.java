@@ -24,25 +24,30 @@ import java.util.Collections;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Deck {
-    
+public class Deck
+{
+
     private final ArrayList<Card> cards;
-    
-    public Deck(ArrayList<Card> cards) {
+
+    public Deck(ArrayList<Card> cards)
+    {
         this.cards = cards;
     }
-    
-    public int count() {
+
+    public int count()
+    {
         return this.cards.size();
     }
-    
-    public Card draw() {
+
+    public Card draw()
+    {
         Card card = this.cards.get(0);
         this.cards.remove(0);
         return card;
     }
-    
-    public void shuffle() {
+
+    public void shuffle()
+    {
         Collections.shuffle(this.cards);
     }
 }

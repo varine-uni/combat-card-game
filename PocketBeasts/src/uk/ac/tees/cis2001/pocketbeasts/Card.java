@@ -21,7 +21,8 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public abstract class Card implements Comparable<Card> {
+public abstract class Card implements Comparable<Card>
+{
 
     private final String id = "";
     private final String name = "";
@@ -31,41 +32,49 @@ public abstract class Card implements Comparable<Card> {
 
     public Card()
     {
-        
+
     }
-    
-    public String getId() {
+
+    public String getId()
+    {
         return this.id;
     }
-    
-    public String getName() {
+
+    public String getName()
+    {
         return this.name;
     }
 
-    public int getManaCost() {
+    public int getManaCost()
+    {
         return this.manaCost;
     }
-    
-    public int getAttack() {
+
+    public int getAttack()
+    {
         return this.attack;
     }
 
-    public int getHealth() {
+    public int getHealth()
+    {
         return this.health;
     }
-    
-    public void damage(int amount) {
+
+    public void damage(int amount)
+    {
         this.health -= amount;
     }
 
     @Override
-    public String toString() {
-        return this.name + " (" + this.id + ") Mana Cost/" + this.manaCost + 
-                " Attack/" + this.attack + " Health/" + this.health;
+    public String toString()
+    {
+        return this.name + " (" + this.id + ") Mana Cost/" + this.manaCost
+                + " Attack/" + this.attack + " Health/" + this.health;
     }
 
     @Override
-    public int compareTo(Card o) {
+    public int compareTo(Card o)
+    {
         return Integer.compare(this.getManaCost(), o.getManaCost());
     }
 }
