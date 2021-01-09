@@ -26,11 +26,11 @@ package uk.ac.tees.cis2001.pocketbeasts;
 public abstract class Card implements Comparable<Card>
 {
 
-    private final String id = "";
-    private final String name = "";
-    private final int manaCost = 0;
-    private final int attack = 0;
-    private int health = 0;
+    protected String id = "";
+    protected String name = "";
+    protected int manaCost = 0;
+    protected int attack = 0;
+    protected int health = 0;
 
     public String getId()
     {

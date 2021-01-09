@@ -20,19 +20,16 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  * 
- * This is a decorator that will add cybernetic components to card objects.
+ * Basic starter card.
  */
-public abstract class CyberDecorator extends Card
+public class Card_Imp extends Card
 {
-    protected Card card;
-
-    public CyberDecorator(Card card)
+    Card_Imp()
     {
-        this.card = card;
-    }
-    
-    public int getAttack()
-    {
-        return card.getAttack() + this.attack;
+        super.attack = 1;
+        super.health = 1;
+        super.manaCost = 1;
+        super.id = "I";
+        super.name = "Imp";
     }
 }

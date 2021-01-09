@@ -19,20 +19,13 @@ package uk.ac.tees.cis2001.pocketbeasts;
 /**
  *
  * @author w9101532
- * 
- * This is a decorator that will add cybernetic components to card objects.
  */
-public abstract class CyberDecorator extends Card
+public class Class_Netrunner extends Player
 {
-    protected Card card;
-
-    public CyberDecorator(Card card)
+    
+    public Class_Netrunner(String name, Deck deck)
     {
-        this.card = card;
+        super(name, deck);
     }
     
-    public int getAttack()
-    {
-        return card.getAttack() + this.attack;
-    }
 }

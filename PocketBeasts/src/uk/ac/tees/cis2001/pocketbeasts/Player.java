@@ -24,7 +24,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
 public class Player implements Killable
 {
     
-    private final int MAX_MANA = 9;
+    private final int MAX_MANA = 10;
     
     private final String name;
     
@@ -158,6 +158,6 @@ public class Player implements Killable
     @Override
     public void death()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO: Add in state patterns for death and being alive.
     }
 }

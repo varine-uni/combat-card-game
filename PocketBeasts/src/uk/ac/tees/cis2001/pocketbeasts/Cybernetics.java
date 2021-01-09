@@ -21,23 +21,15 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author w9101532
  * 
  * Cybernetics class extends the decorator as a cybernetic object can "wrap" a
- * card object. This is usually possible if a card can ask for a cybernetic arm
- * or leg.
+ * card object. This is usually possible if a card can ask for a cybernetic arm,
+ * leg, or misc.
  */
 public class Cybernetics extends CyberDecorator 
-{     
-    enum BodyPart //Cybernetic objects can either be an arm or leg cybernetic.
-    {
-        LEGS,
-        ARMS
-    }
-    
-    int c_Damage; //Cybernetic damage, if there is any.
-    BodyPart c_BodyPart; //Body part selection.
-    
-    public Cybernetics(Card card)
+{
+    public Cybernetics(Card card, int attack, int health)
     {
         super(card);
+        this.attack = attack;
+        this.health = health;
     }
-  
 }
