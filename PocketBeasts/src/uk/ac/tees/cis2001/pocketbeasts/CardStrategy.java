@@ -20,10 +20,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Class_CyberWarrior extends Player
-{  
-    public Class_CyberWarrior(String name, Deck deck)
-    {
-        super(name, deck);
-    }   
+public interface CardStrategy
+{
+    public String action(int value);
 }

@@ -35,4 +35,10 @@ public abstract class CyberDecorator extends Card
     {
         return card.getAttack() + this.attack;
     }
+    
+    public int getHealth()
+    {
+        return card.getHealth() + this.health;
+    }
+
 }

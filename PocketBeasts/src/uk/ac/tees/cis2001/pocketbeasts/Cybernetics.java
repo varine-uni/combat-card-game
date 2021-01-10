@@ -26,10 +26,20 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Cybernetics extends CyberDecorator 
 {
+    public boolean isLeg = false;
+    public boolean isArm = false;
+    public boolean isMisc = false;
+    
     public Cybernetics(Card card, int attack, int health)
     {
         super(card);
         this.attack = attack;
         this.health = health;
+    }
+    
+    public String getPartType()
+    {
+        String output = "Is leg? : " + isLeg + "\nIs arm? : " + isArm + "\nIs Misc? : " + isMisc;
+        return output;
     }
 }

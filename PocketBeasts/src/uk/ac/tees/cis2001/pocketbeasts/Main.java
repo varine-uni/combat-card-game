@@ -62,6 +62,9 @@ public class Main
      */
     public static void main(String[] args)
     {
+        Card imp = new Card_Imp();
+        imp = new Cybernetics(imp, 1, 1);
+        imp.getAttack();
 
 //        System.out.println("");
 //        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
@@ -96,11 +99,6 @@ public class Main
 //        System.out.println("Press ENTER to continue...");
 //        Scanner sc = new Scanner(System.in);
 //        sc.nextLine();
-//
-//        Player[] players = new Player[]
-//        {
-//           //TODO: Add classes here, with their respective starter decks.
-//        };
 //
 //        for (Player player : players)
 //        {

@@ -20,10 +20,12 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Class_CyberWarrior extends Player
-{  
-    public Class_CyberWarrior(String name, Deck deck)
+public class Action_Attack implements CardStrategy
+{
+    @Override
+    public String action(int value)
     {
-        super(name, deck);
-    }   
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

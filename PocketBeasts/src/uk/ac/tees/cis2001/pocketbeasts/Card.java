@@ -31,7 +31,8 @@ public abstract class Card implements Comparable<Card>
     protected int manaCost = 0;
     protected int attack = 0;
     protected int health = 0;
-
+    protected CardStrategy strategy;
+    
     public String getId()
     {
         return this.id;
@@ -60,6 +61,16 @@ public abstract class Card implements Comparable<Card>
     public void damage(int amount)
     {
         this.health -= amount;
+    }
+    
+    public void setStrategy(CardStrategy strategy)
+    {
+        this.strategy = strategy;
+    }
+    
+    public void useAction(int value)
+    {
+        strategy.action(value);
     }
 
     @Override
