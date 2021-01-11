@@ -22,6 +22,17 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Class_Netrunner extends Player
 {
+    public static final Card[] STARTER_CARDS = new Card[]
+    {
+        new Card("BR", "Barn Rat", 1, 1, 1),
+        new Card("SP", "Scampering Pup", 2, 2, 1),
+        new Card("HB", "Hardshell Beetle", 2, 1, 2),
+        new Card("VHC", "Vicious House Cat", 3, 3, 2),
+        new Card("GD", "Guard Dog", 3, 2, 3),
+        new Card("ARH", "All Round Hound", 3, 3, 3),
+        new Card("MO", "Moor Owl", 4, 4, 2),
+        new Card("HT", "Highland Tiger", 5, 4, 4)
+    };
     
     public Class_Netrunner(String name, Deck deck)
     {

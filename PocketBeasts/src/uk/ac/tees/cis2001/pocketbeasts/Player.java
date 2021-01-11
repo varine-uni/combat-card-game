@@ -23,135 +23,157 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Player implements Killable
 {
-    
+
     private final int MAX_MANA = 10;
-    
+
     private final String name;
-    
+
     private int manaAvailable;
     private int manaTicker;
     private int health;
-    
+
     private final Deck deck;
     private final Hand hand;
-    private final InPlay inPlay;
+    private final static Table table = new Table();
     private final Graveyard graveyard;
 
-    public Player(String name, Deck deck) {
+    public Player(String name, Deck deck)
+    {
         this.name = name;
         this.manaAvailable = 0;
         this.manaTicker = 0;
         this.health = 15;
         this.deck = deck;
         this.hand = new Hand();
-        this.inPlay = new InPlay();
         this.graveyard = new Graveyard();
     }
 
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
-    public int getManaAvailable() {
+    public int getManaAvailable()
+    {
         return this.manaAvailable;
     }
 
-    public int getHealth() {
+    public int getHealth()
+    {
         return this.health;
     }
-    
-    public Deck getDeck() {
+
+    public Deck getDeck()
+    {
         return this.deck;
     }
-    
-    public Hand getHand() {
+
+    public Hand getHand()
+    {
         return this.hand;
     }
 
-    public InPlay getInPlay() {
-        return this.inPlay;
+    public Table getInPlay()
+    {
+        return this.table;
     }
-    
-    public Graveyard getGraveyard() {
+
+    public Graveyard getGraveyard()
+    {
         return this.graveyard;
     }
-    
-    public void newGame() {
+
+    public void newGame()
+    {
         this.deck.shuffle();
-        for (int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             this.hand.add(this.deck.draw());
         }
     }
-    
-    public void addMana() {
-        if (this.manaTicker < this.MAX_MANA) {
-            this.manaTicker++;
+
+    public void addMana()
+    {
+        if (manaAvailable < MAX_MANA)
+        {
+            manaAvailable++;
         }
-        this.manaAvailable = manaTicker;
     }
-    
-    public void useMana(int amount) {
+
+    public void useMana(int amount)
+    {
         this.manaAvailable -= amount;
     }
-    
-    public void drawCard() {
+
+    public void drawCard()
+    {
         this.hand.add(this.deck.draw());
     }
-    
-    public Boolean damage(int amount) {
+
+    public Boolean damage(int amount)
+    {
         this.health -= amount;
         return this.health <= 0;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-9s HEALTH/%-5d MANA/%d\n", this.name, this.health, this.manaAvailable));
 
-        for (int i=0; i<this.inPlay.count()+2; i++) {
+        for (int i = 0; i < this.table.count() + 2; i++)
+        {
             sb.append("+-------+ ");
         }
         sb.append("\n");
-        
-        for (int i=0; i<2; i++) {
+
+        for (int i = 0; i < 2; i++)
+        {
             sb.append("|       | ");
         }
-        for (int i=0; i<this.inPlay.count(); i++) {
-            sb.append(String.format("|%7d| ", this.inPlay.getCard(i).getManaCost()));
+        for (int i = 0; i < this.table.count(); i++)
+        {
+            sb.append(String.format("|%7d| ", this.table.getCard(i).getManaCost()));
         }
         sb.append("\n");
-        
+
         sb.append("| DECK  | ");
         sb.append("| GRAVE | ");
-        for (int i=0; i<this.inPlay.count(); i++) {
-            sb.append(String.format("|  %-5s| ", this.inPlay.getCard(i).getId()));
+        for (int i = 0; i < this.table.count(); i++)
+        {
+            sb.append(String.format("|  %-5s| ", this.table.getCard(i).getId()));
         }
         sb.append("\n");
-        
+
         sb.append(String.format("| %-6d| ", this.deck.count()));
         sb.append(String.format("| %-6d| ", this.graveyard.count()));
-        for (int i=0; i<this.inPlay.count(); i++) {
+        for (int i = 0; i < this.table.count(); i++)
+        {
             sb.append("|       | ");
         }
         sb.append("\n");
-        
-        for (int i=0; i<2; i++) {
+
+        for (int i = 0; i < 2; i++)
+        {
             sb.append("|       | ");
         }
-        for (int i=0; i<this.inPlay.count(); i++) {
-            sb.append(String.format("|%-2d %4d| ", this.inPlay.getCard(i).getAttack(), this.inPlay.getCard(i).getHealth()));
+        for (int i = 0; i < this.table.count(); i++)
+        {
+            sb.append(String.format("|%-2d %4d| ", this.table.getCard(i).getAttack(), this.table.getCard(i).getHealth()));
         }
         sb.append("\n");
-        
-        for (int i=0; i<this.inPlay.count()+2; i++) {
+
+        for (int i = 0; i < this.table.count() + 2; i++)
+        {
             sb.append("+-------+ ");
         }
         sb.append("\n");
         sb.append(String.format("%d card(s) in hand.\n", this.hand.count()));
         sb.append("\n");
-        
+
         sb.append(this.hand.toString());
-        
+
         return sb.toString();
     }
 

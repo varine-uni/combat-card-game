@@ -22,10 +22,12 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Action_Attack implements CardStrategy
 {
+    private Card card;
+    
     @Override
     public String action(int value)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     
 }
