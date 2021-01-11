@@ -20,10 +20,10 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author James Fairbairn
  * @author Steven Mead
- * 
+ *
  * Card object class. All cards are based on this object.
  */
-public abstract class Card implements Comparable<Card>
+public class Card implements Comparable<Card>
 {
 
     protected String id = "";
@@ -32,7 +32,30 @@ public abstract class Card implements Comparable<Card>
     protected int attack = 0;
     protected int health = 0;
     protected CardStrategy strategy;
-    
+
+    Card()
+    {
+
+    }
+
+    public Card(String id, String name, int manaCost, int attack, int health)
+    {
+        this.id = id;
+        this.name = name;
+        this.manaCost = manaCost;
+        this.attack = attack;
+        this.health = health;
+    }
+
+    public Card(Card card)
+    {
+        this.id = card.id;
+        this.name = card.name;
+        this.manaCost = card.manaCost;
+        this.attack = card.attack;
+        this.health = card.health;
+    }
+
     public String getId()
     {
         return this.id;
@@ -62,12 +85,12 @@ public abstract class Card implements Comparable<Card>
     {
         this.health -= amount;
     }
-    
+
     public void setStrategy(CardStrategy strategy)
     {
         this.strategy = strategy;
     }
-    
+
     public void useAction(int value)
     {
         strategy.action(value);
