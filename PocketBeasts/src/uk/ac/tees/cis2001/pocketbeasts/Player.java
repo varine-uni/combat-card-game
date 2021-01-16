@@ -29,23 +29,24 @@ public class Player implements Killable
     private final String name;
 
     private int manaAvailable;
-    private int manaTicker;
+    private int currentMaxMana;
     private int health;
 
-    private final Deck deck;
-    private final Hand hand;
-    private final static Table table = new Table();
-    private final Graveyard graveyard;
+    protected final Deck deck = null;
+    protected final Hand hand;
+    protected final Table table = new Table();
+    protected final Graveyard graveyard;
 
-    public Player(String name, Deck deck)
+    public Player(String name)
     {
         this.name = name;
         this.manaAvailable = 0;
-        this.manaTicker = 0;
+        this.currentMaxMana = 0;
         this.health = 15;
-        this.deck = deck;
         this.hand = new Hand();
         this.graveyard = new Graveyard();
+        
+        newGame(); //When constructed, immediately add mana and cards to hand.
     }
 
     public String getName()
@@ -85,19 +86,23 @@ public class Player implements Killable
 
     public void newGame()
     {
-        this.deck.shuffle();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
         {
             this.hand.add(this.deck.draw());
         }
+        this.deck.shuffle(); //From now on, the cards taken from deck are random.
+        
+        addMana(); //New game, add the initial amount of mana (1 point).   
     }
 
     public void addMana()
     {
-        if (manaAvailable < MAX_MANA)
+        if (currentMaxMana < MAX_MANA)
         {
-            manaAvailable++;
+            currentMaxMana++;
         }
+        
+        this.manaAvailable = currentMaxMana;
     }
 
     public void useMana(int amount)

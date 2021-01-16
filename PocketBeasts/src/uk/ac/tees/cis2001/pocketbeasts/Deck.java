@@ -23,44 +23,65 @@ import java.util.Collections;
  *
  * @author James Fairbairn
  * @author Steven Mead
- * 
+ *
  * Cards to choose from.
  */
 public class Deck
 {
 
-    private final ArrayList<Card> baseDeck = new ArrayList<>();
-    
-    public static final Card[] STARTER_CARDS = new Card[]
+    private final ArrayList<Card> deck = new ArrayList<>();
+
+    public final Card[] STARTER_CARDS = new Card[]
     {
         new Card("I", "Imp", 1, 1, 1),
         new Card("DN", "Demon", 2, 2, 1),
-        new Card("HD", "Hellhound", 2, 1, 2),
+        new Card("HD", "Hellhound", 2, 2, 2),
         new Card("ZE", "Zombie", 3, 3, 2),
         new Card("US", "Undead Soldier", 3, 2, 3),
-        new Card("TN", "Titan", 3, 3, 3),
-        new Card("ER", "Enslaver", 4, 4, 2),
-        new Card("DL", "Dark Lord", 5, 4, 4)
+        new Card("TN", "Titan", 4, 2, 10),
+        new Card("ER", "Enslaver", 4, 4, 6),
+        new Card("DL", "Dark Lord", 5, 6, 8)
     };
+
+    public ArrayList<Card> getBaseDeck()
+    {
+        return deck;
+    }
     
     Deck()
     {
-       for (int i = 0; i < 2; i++)
+        addToDeck(STARTER_CARDS);
+    }
+    
+    public void addToDeck(Card[] cardArray)
+    {
+        for (int i = 0; i < 2; i++)
         {
-            for (Card card : STARTER_CARDS)
+            for (Card card : cardArray)
             {
-                baseDeck.add(new Card(card));
+                deck.add(new Card(card));
             }
         }
     }
     
-    public Card draw() {
-        Card card = this.baseDeck.get(0);
-        this.baseDeck.remove(0);
+    public Card draw()
+    {
+        Card card = this.deck.get(0);
+        this.deck.remove(0);
         return card;
     }
+
+    public void shuffle()
+    {
+        Collections.shuffle(this.deck);
+    }
     
-    public void shuffle() {
-        Collections.shuffle(this.baseDeck);
+    public int count() {
+        return this.deck.size();
+    }
+    
+    public void clearDeck()
+    {
+        deck.clear();
     }
 }

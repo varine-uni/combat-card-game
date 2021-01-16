@@ -22,8 +22,8 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Class_CyberWarrior extends Player
 {  
-    public Class_CyberWarrior(String name, Deck deck)
+    public Class_CyberWarrior(String name)
     {
-        super(name, deck);
+        super("Cyber Warrior" + name);
     }   
 }
