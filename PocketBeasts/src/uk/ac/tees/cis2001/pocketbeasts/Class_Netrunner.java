@@ -22,7 +22,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Class_Netrunner extends Player
 {
-    public static final Card[] NETRUNNER_CARDS = new Card[]
+    public static final Card[] NETRUNNER_CARDS = new Card[] //Unique cards for this class.
     {
         new Card("FH", "Flayed Hacker", 2, 5, 1),
         new Card("SB", "System Breaker", 3, 3, 3),
@@ -33,7 +33,7 @@ public class Class_Netrunner extends Player
     public Class_Netrunner(String name)
     {
         super("Netrunner" + name);
-        this.deck.addToDeck(NETRUNNER_CARDS);
+        this.deck.addToDeck(NETRUNNER_CARDS); //Add unique cards to deck.
     }
     
 }

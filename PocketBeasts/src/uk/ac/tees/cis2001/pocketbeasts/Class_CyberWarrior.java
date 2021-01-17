@@ -22,8 +22,17 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Class_CyberWarrior extends Player
 {  
+    public static final Card[] CYBERWARRIOR_CARDS = new Card[] //Unique cards for this class.
+    {
+        new Card("AI", "Armoured Imp", 3, 1, 5),
+        new Card("AD", "Armoured Demon", 3, 2, 5),
+        new Card("TK", "Tank", 5, 3, 7),
+        new Card("TT", "Tyrant", 10, 8, 15)
+    }; 
+    
     public Class_CyberWarrior(String name)
     {
         super("Cyber Warrior" + name);
+        this.deck.addToDeck(CYBERWARRIOR_CARDS); //Add unique cards to deck.
     }   
 }

@@ -33,11 +33,6 @@ public class Card implements Comparable<Card>
     protected int health = 0;
     protected CardStrategy strategy;
 
-    Card()
-    {
-
-    }
-
     public Card(String id, String name, int manaCost, int attack, int health)
     {
         this.id = id;

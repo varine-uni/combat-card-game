@@ -102,16 +102,10 @@ public class Main
         
         Player[] players = new Player[]
         {
-            new Class_Netrunner("V", nullDeck),
-            new Class_CyberWarrior("Silverhand", nullDeck)
+            new Class_Netrunner("V"),
+            new Class_CyberWarrior("Silverhand")
         };
         
-        for (Player player : players)
-        {
-            player.newGame();
-            System.out.println(player);
-        }
-
         String outputMessage = "";
         Boolean run = true;
         while (run)
@@ -127,112 +121,13 @@ public class Main
                 else
                     index = 1;
                 
-                // Add mana and draw card
-                player.addMana();
-                player.drawCard();
-
                 // Print initial play state
                 System.out.println(player);
-
-
-                // Cycle through cards in play to attack
-                for (Card card : player.getInPlay().getCards())
-                {
-                    System.out.println(card.toString());
-
-                    String attack = getPrompt(
-                            player.getName() + " attack with " + card.getName() + "? (Yes/No): ",
-                            new String[]
-                            {
-                                "Yes", "yes", "y", "No", "no", "n"
-                            });
-                    if (attack.equals("Yes") || attack.equals("yes") || attack.equals("y"))
-                    {
-                        // Choose who to attack, player directly or a player's beast
-                        int attackChoice = 2;
-                        System.out.println("Who would you like to attack? ");
-                        System.out.println("1. " + players[index].getName());
-                        for (Card otherCard : players[index].getInPlay().getCards())
-                        {
-                            System.out.println(attackChoice + ". " + otherCard);
-                            attackChoice++;
-                        }
-                        ArrayList<String> prompts = new ArrayList<>();
-                        for (int i = 1; i < attackChoice; i++)
-                        {
-                            prompts.add(String.valueOf(i));
-                        }
-                        String target = getPrompt("Choose a number: ", prompts.toArray(new String[0]));
-                        if (target.equals("1"))
-                        { // Player
-                            if (players[index].damage(card.getAttack()))
-                            {
-                                // if true returned players health <= 0
-                                outputMessage = player.getName() + " wins!";
-                                run = false;
-                                break;
-                            }
-                            System.out.println(players[index].getName() + " is now at " + players[index].getHealth());
-                        } else
-                        { // Beast, index is `target-2`
-                            Card targetCard = players[index].getInPlay().getCard(Integer.parseInt(target) - 2);
-                            targetCard.damage(card.getAttack());
-                            card.damage(targetCard.getAttack());
-                        }
-                    }
-                }
 
                 if (!run)
                 {
                     break;
                 }
-
-                // Cycle through cards in play remove "dead" cards (health <= 0)
-                ArrayList<Card> toRemove = new ArrayList<>();
-                for (Card card : player.getInPlay().getCards())
-                {
-                    if (card.getHealth() <= 0)
-                    {
-                        toRemove.add(card);
-                        player.getGraveyard().add(card);
-                    }
-                }
-                player.getInPlay().removeAll(toRemove);
-
-                toRemove = new ArrayList<>();
-                for (Card card : players[index].getInPlay().getCards())
-                {
-                    if (card.getHealth() <= 0)
-                    {
-                        toRemove.add(card);
-                        players[index].getGraveyard().add(card);
-                    }
-                }
-                players[index].getInPlay().removeAll(toRemove);
-
-                // Play cards from hand
-                toRemove = new ArrayList<>();
-                for (Card card : player.getHand().getCards())
-                {
-                    if (card.getManaCost() <= player.getManaAvailable())
-                    {
-                        System.out.println(card.toString());
-
-                        String play = getPrompt(
-                                player.getName() + " play " + card.getName() + "? (Yes/No) ",
-                                new String[]
-                                {
-                                    "Yes", "yes", "y", "No", "no", "n"
-                                });
-                        if (play.equals("Yes") || play.equals("yes") || play.equals("y"))
-                        {
-                            player.getInPlay().add(card);
-                            player.useMana(card.getManaCost());
-                            toRemove.add(card);
-                        }
-                    }
-                }
-                player.getHand().removeAll(toRemove);
 
                 // Print final play state
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
