@@ -48,6 +48,17 @@ public class Player implements Killable
         
         newGame(); //When constructed, immediately add mana and cards to hand.
     }
+    
+    public void newGame()
+    {
+        for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
+        {
+            this.hand.add(this.deck.draw());
+        }
+        this.deck.shuffle(); //From now on, the cards taken from deck are random.
+        
+        addMana(); //New game, add the initial amount of mana (1 point).   
+    }
 
     public String getName()
     {
@@ -82,17 +93,6 @@ public class Player implements Killable
     public Graveyard getGraveyard()
     {
         return this.graveyard;
-    }
-
-    public void newGame()
-    {
-        for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
-        {
-            this.hand.add(this.deck.draw());
-        }
-        this.deck.shuffle(); //From now on, the cards taken from deck are random.
-        
-        addMana(); //New game, add the initial amount of mana (1 point).   
     }
 
     public void addMana()
