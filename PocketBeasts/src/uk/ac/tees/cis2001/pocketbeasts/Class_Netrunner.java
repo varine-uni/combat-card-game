@@ -22,14 +22,21 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class Class_Netrunner extends Player
 {
-    public static final Card[] NETRUNNER_CARDS = new Card[] //Unique cards for this class.
+    /**
+     * Unique cards for this class.
+     */
+    public static final Card[] NETRUNNER_CARDS = new Card[] 
     {
-        new Card("FH", "Flayed Hacker", 2, 5, 1),
+        new Card("FH", "Flayed Hacker", 2, 4, 1),
         new Card("SB", "System Breaker", 3, 3, 3),
         new Card("BS", "Bad Sector", 4, 4, 5),
         new Card("S", "Someone", 7, 10, 10)
     }; 
     
+    /**
+     * Constructor.
+     * @param name  Input a name for the user. 
+     */
     public Class_Netrunner(String name)
     {
         super("Netrunner" + name);

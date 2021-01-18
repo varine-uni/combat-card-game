@@ -27,23 +27,6 @@ import java.util.Scanner;
  */
 public class Main
 {
-    
-    
-//    public static ArrayList<Card> getStarterDeck()
-//    {
-//        ArrayList<Card> starterDeck = new ArrayList<>();
-//
-//        for (int i = 0; i < 2; i++)
-//        {
-//            for (Card card : STARTER_CARDS)
-//            {
-//                starterDeck.add(new Card(card));
-//            }
-//        }
-//
-//        return starterDeck;
-//    }
-
     public static String getPrompt(String prompt, String[] validResponse)
     {
         System.out.print(prompt);
@@ -63,7 +46,7 @@ public class Main
      * @param args the command line arguments
      */
     public static void main(String[] args)
-    {   
+    {
 //        System.out.println("");
 //        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
 //        System.out.println("Welcome to PocketBeasts!");
@@ -86,6 +69,7 @@ public class Main
 //        System.out.println("Players each take turns. Each turn consists four phases:");
 //        System.out.println("1. Add mana (mana increases by one each turn and replenishes in full).");
 //        System.out.println("2. Draw a card.");
+        //TODO: Remove step 3 of the game.
 //        System.out.println("3. Cycle through your cards in play (if any), choosing whether to attack.");
 //        System.out.println("   a. Attacking the other player directly with your card inflicts damage to their health.");
 //        System.out.println("      equal to the attack power of the card.");
@@ -97,44 +81,42 @@ public class Main
 //        System.out.println("Press ENTER to continue...");
 //        Scanner sc = new Scanner(System.in);
 //        sc.nextLine();
-        
-        Deck nullDeck = null; //TODO: Remove this. This is just testing the classes.
-        
-        Player[] players = new Player[]
-        {
-            new Class_Netrunner("V"),
-            new Class_CyberWarrior("Silverhand")
-        };
-        
-        String outputMessage = "";
-        Boolean run = true;
-        while (run)
-        {
-            for (Player player : players)
-            {
-                int index = 0; //Index counter for knowing the second player's variable.
-                
-                if (index == 1) //Counter alternates between 1 and 0 for the player's array.
-                {
-                    index = 0;
-                }
-                else
-                    index = 1;
-                
-                // Print initial play state
-                System.out.println(player);
-
-                if (!run)
-                {
-                    break;
-                }
-
-                // Print final play state
-                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                System.out.println(player);
-            }
-        }
-
-        System.out.println(outputMessage);
+//        
+//        Player[] players = new Player[]
+//        {
+//            new Class_Netrunner("V"),
+//            new Class_CyberWarrior("Silverhand")
+//        };
+//        
+//        String outputMessage = "";
+//        Boolean run = true;
+//        while (run)
+//        {
+//            for (Player player : players)
+//            {
+//                int index = 0; //Index counter for knowing the second player's variable.
+//                
+//                if (index == 1) //Counter alternates between 1 and 0 for the player's array.
+//                {
+//                    index = 0;
+//                }
+//                else
+//                    index = 1;
+//                
+//                // Print initial play state
+//                System.out.println(player);
+//
+//                if (!run)
+//                {
+//                    break;
+//                }
+//
+//                // Print final play state
+//                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+//                System.out.println(player);
+//            }
+//        }
+//
+//        System.out.println(outputMessage);
     }
 }

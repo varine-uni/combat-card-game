@@ -32,7 +32,7 @@ public class Player implements Killable
     private int currentMaxMana;
     private int health;
 
-    protected final Deck deck = null;
+    protected final Deck deck;
     protected final Hand hand;
     protected final Table table = new Table();
     protected final Graveyard graveyard;
@@ -43,6 +43,7 @@ public class Player implements Killable
         this.manaAvailable = 0;
         this.currentMaxMana = 0;
         this.health = 15;
+        this.deck = new Deck();
         this.hand = new Hand();
         this.graveyard = new Graveyard();
         
