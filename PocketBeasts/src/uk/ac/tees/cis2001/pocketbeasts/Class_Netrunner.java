@@ -39,7 +39,7 @@ public class Class_Netrunner extends Player
      */
     public Class_Netrunner(String name)
     {
-        super("Netrunner" + name);
+        super("Netrunner " + name);
         this.deck.addToDeck(NETRUNNER_CARDS); //Add unique cards to deck.
     }
     

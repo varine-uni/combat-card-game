@@ -22,5 +22,21 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public class CardBuilder
 {
+    private Card card;
     
+    CardBuilder(Card card)
+    {
+        this.card = card;
+    }
+    
+    public Card buildArm()
+    {
+        card.setArmSlots(card.getArmSlots()-1);
+        return card;
+    }
+    
+    public Card build()
+    {
+        return card;
+    }
 }

@@ -39,7 +39,7 @@ public class Class_CyberWarrior extends Player
      */
     public Class_CyberWarrior(String name)
     {
-        super("Cyber Warrior" + name);
+        super("Cyber Warrior " + name);
         this.deck.addToDeck(CYBERWARRIOR_CARDS); //Add unique cards to deck.
     }   
 }

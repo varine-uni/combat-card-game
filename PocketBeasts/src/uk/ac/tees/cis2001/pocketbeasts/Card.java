@@ -31,6 +31,9 @@ public class Card implements Comparable<Card>
     protected int manaCost = 0;
     protected int attack = 0;
     protected int health = 0;
+    protected int armSlots = 0;
+    protected int legSlots = 0;
+    protected int miscSlots = 0;
     protected CardStrategy strategy;
 
     Card()
@@ -45,7 +48,6 @@ public class Card implements Comparable<Card>
         this.manaCost = manaCost;
         this.attack = attack;
         this.health = health;
-        new Cybernetics(this, 5, 5);
     }
 
     public Card(Card card)
@@ -86,7 +88,58 @@ public class Card implements Comparable<Card>
     {
         this.health -= amount;
     }
+    
+    public int getArmSlots()
+    {
+        return this.armSlots;
+    }
+    
+    public int getLegSlots()
+    {
+        return this.legSlots;
+    }
+    
+    public int getMiscSlots()
+    {
+        return this.miscSlots;
+    }
+    
+    public void setArmSlots(int value)
+    {
+        if (value != 0)
+        {
+           this.armSlots = value; 
+        }
+        else
+        {
+            System.out.println("Error: No slots available.");
+        }
+    }
 
+    public void setLegSlots(int value)
+    {
+        if (value != 0)
+        {
+           this.legSlots = value; 
+        }
+        else
+        {
+            System.out.println("Error: No slots available.");
+        }
+    }
+    
+    public void setMiscSlots(int value)
+    {
+        if (value != 0)
+        {
+           this.miscSlots = value; 
+        }
+        else
+        {
+            System.out.println("Error: No slots available.");
+        }
+    }
+    
     public void setStrategy(CardStrategy strategy)
     {
         this.strategy = strategy;

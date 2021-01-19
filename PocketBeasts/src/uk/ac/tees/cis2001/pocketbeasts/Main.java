@@ -82,41 +82,50 @@ public class Main
 //        Scanner sc = new Scanner(System.in);
 //        sc.nextLine();
 //        
-//        Player[] players = new Player[]
-//        {
-//            new Class_Netrunner("V"),
-//            new Class_CyberWarrior("Silverhand")
-//        };
-//        
-//        String outputMessage = "";
-//        Boolean run = true;
-//        while (run)
-//        {
-//            for (Player player : players)
-//            {
-//                int index = 0; //Index counter for knowing the second player's variable.
-//                
-//                if (index == 1) //Counter alternates between 1 and 0 for the player's array.
-//                {
-//                    index = 0;
-//                }
-//                else
-//                    index = 1;
-//                
-//                // Print initial play state
-//                System.out.println(player);
-//
-//                if (!run)
-//                {
-//                    break;
-//                }
-//
-//                // Print final play state
-//                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-//                System.out.println(player);
-//            }
-//        }
-//
-//        System.out.println(outputMessage);
+        Player[] players = new Player[]
+        {
+            new Class_Netrunner("V"),
+            new Class_CyberWarrior("Silverhand")
+        };
+        
+        //TODO: Deal with this.
+        //String outputMessage = "";
+        
+        Boolean run = true;
+        while (run)
+        {
+            for (Player player : players)
+            {
+                int index = 0; //Index counter for knowing the second player's variable.
+                
+                if (index == 1) //Counter alternates between 1 and 0 for the player's array.
+                {
+                    index = 0;
+                }
+                else
+                    index = 1;
+                
+                // Print initial play state
+                System.out.println(player);
+                
+                Scanner playerInput = new Scanner(System.in);
+                
+                System.out.println("Player: " + player.getName() + "turn");
+                System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
+                
+                playerInput.next();
+                
+                if (!run)
+                {
+                    break;
+                }
+
+                // Print final play state
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println(player);
+            }
+        }
+
+        //System.out.println(outputMessage);
     }
 }
