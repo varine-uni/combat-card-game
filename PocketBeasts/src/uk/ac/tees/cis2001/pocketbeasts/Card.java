@@ -153,8 +153,8 @@ public class Card implements Comparable<Card>
     @Override
     public String toString()
     {
-        return this.name + " (" + this.id + ") Mana Cost/" + this.manaCost
-                + " Attack/" + this.attack + " Health/" + this.health;
+        return this.name + " (" + this.id + ") Mana Cost(" + this.manaCost + ")"
+                + " Attack(" + this.attack + ") Health(" + this.health + ")\n";
     }
 
     @Override

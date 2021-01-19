@@ -44,4 +44,9 @@ public class Graveyard
     {
         return this.cards.size();
     }
+    
+    public void clearGrave()
+    {
+        cards.clear();
+    }
 }

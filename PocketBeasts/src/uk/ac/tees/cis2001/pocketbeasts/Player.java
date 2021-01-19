@@ -46,12 +46,13 @@ public class Player
         this.deck = new Deck();
         this.hand = new Hand();
         this.graveyard = new Graveyard();
-        
-        newGame(); //When constructed, immediately add mana and cards to hand.
     }
     
     public void newGame()
     {
+        deck.clearDeck();
+        hand.clearHand();
+        graveyard.clearGrave();
         for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
         {
             this.hand.add(this.deck.draw());

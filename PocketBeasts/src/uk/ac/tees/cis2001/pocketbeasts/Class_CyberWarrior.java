@@ -25,7 +25,7 @@ public class Class_CyberWarrior extends Player
     /**
      * Unique cards for this class.
      */
-    public static final Card[] CYBERWARRIOR_CARDS = new Card[] 
+    public final Card[] CYBERWARRIOR_CARDS = new Card[] 
     {
         new Card("AI", "Armoured Imp", 3, 1, 5),
         new Card("AD", "Armoured Demon", 3, 2, 5),

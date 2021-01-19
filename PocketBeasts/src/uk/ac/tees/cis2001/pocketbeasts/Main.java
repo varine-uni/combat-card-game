@@ -88,6 +88,8 @@ public class Main
             new Class_CyberWarrior("Silverhand")
         };
         
+        newGame(players);
+        
         //TODO: Deal with this.
         //String outputMessage = "";
         
@@ -112,13 +114,14 @@ public class Main
                 
                 System.out.println("Player: " + player.getName() + "turn");
                 System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
-                for (int i = 0; i < players[index].table.getCards().size(); i++)
-                {
-                    players[index].getTable().getCards().get(index).getName();
+                //TODO: Testing with hand but should be table.
+                for (int i = 0; i < players[index].getHand().getCards().size(); i++)
+                {   //The (i+1)+"." is just indexing each card in the loop starting from 1.
+                    System.out.println((i+1)+"."+players[index].getHand().getCards().get(i).toString());
                 }
                 
                 
-                playerInput.next();
+                playerInput.nextInt();
                 
                 if (!run)
                 {
@@ -132,5 +135,13 @@ public class Main
         }
 
         //System.out.println(outputMessage);
+    }
+    
+    public static void newGame(Player[] playerArray)
+    {
+        for (Player players : playerArray)
+        {
+            players.newGame();
+        }
     }
 }

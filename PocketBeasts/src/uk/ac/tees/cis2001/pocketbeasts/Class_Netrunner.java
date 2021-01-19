@@ -25,7 +25,7 @@ public class Class_Netrunner extends Player
     /**
      * Unique cards for this class.
      */
-    public static final Card[] NETRUNNER_CARDS = new Card[] 
+    public final Card[] NETRUNNER_CARDS = new Card[] 
     {
         new Card("FH", "Flayed Hacker", 2, 4, 1),
         new Card("SB", "System Breaker", 3, 3, 3),
