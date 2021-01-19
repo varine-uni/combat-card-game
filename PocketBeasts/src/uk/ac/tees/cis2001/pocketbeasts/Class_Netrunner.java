@@ -30,7 +30,7 @@ public class Class_Netrunner extends Player
         new Card("FH", "Flayed Hacker", 2, 4, 1),
         new Card("SB", "System Breaker", 3, 3, 3),
         new Card("BS", "Bad Sector", 4, 4, 5),
-        new Card("S", "Someone", 7, 10, 10)
+        new Card("SE", "Someone", 7, 10, 10)
     }; 
     
     /**

@@ -33,7 +33,7 @@ public class Deck
 
     public final Card[] STARTER_CARDS = new Card[]
     {
-        new Card("I", "Imp", 1, 1, 1),
+        new Card("IP", "Imp", 1, 1, 1),
         new Card("DN", "Demon", 2, 2, 1),
         new Card("HD", "Hellhound", 2, 2, 2),
         new Card("ZE", "Zombie", 3, 3, 2),

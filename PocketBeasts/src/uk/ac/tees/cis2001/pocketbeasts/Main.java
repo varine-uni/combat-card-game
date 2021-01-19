@@ -112,6 +112,11 @@ public class Main
                 
                 System.out.println("Player: " + player.getName() + "turn");
                 System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
+                for (int i = 0; i < players[index].table.getCards().size(); i++)
+                {
+                    players[index].getTable().getCards().get(index).getName();
+                }
+                
                 
                 playerInput.next();
                 

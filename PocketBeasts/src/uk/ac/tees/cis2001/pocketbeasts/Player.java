@@ -21,7 +21,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author James Fairbairn
  * @author Steven Mead
  */
-public class Player implements Killable
+public class Player
 {
 
     private final int MAX_MANA = 10;
@@ -86,7 +86,7 @@ public class Player implements Killable
         return this.hand;
     }
 
-    public Table getInPlay()
+    public Table getTable()
     {
         return this.table;
     }
@@ -181,11 +181,5 @@ public class Player implements Killable
         sb.append(this.hand.toString());
 
         return sb.toString();
-    }
-
-    @Override
-    public void death()
-    {
-        //TODO: Add in state patterns for death and being alive.
     }
 }
