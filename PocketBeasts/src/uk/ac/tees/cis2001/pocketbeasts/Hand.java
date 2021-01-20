@@ -23,6 +23,7 @@ import java.util.Collections;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * @author w9101532
  * 
  * Current cards in your hand.
  */

@@ -22,6 +22,7 @@ import java.util.ArrayList;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * @author w9101532
  * 
  * Cards that die go here.
  */
@@ -43,10 +44,5 @@ public class Graveyard
     public int count() 
     {
         return this.cards.size();
-    }
-    
-    public void clearGrave()
-    {
-        cards.clear();
     }
 }

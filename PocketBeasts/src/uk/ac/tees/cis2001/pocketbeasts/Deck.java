@@ -23,7 +23,8 @@ import java.util.Collections;
  *
  * @author James Fairbairn
  * @author Steven Mead
- *
+ * @author w9101532
+ * 
  * Cards to choose from.
  */
 public class Deck
@@ -78,10 +79,5 @@ public class Deck
     
     public int count() {
         return this.deck.size();
-    }
-    
-    public void clearDeck()
-    {
-        deck.clear();
     }
 }

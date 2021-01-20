@@ -20,6 +20,9 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * @author w9101532
+ * 
+ * Super player class. Character classes will inherit this class.
  */
 public class Player
 {
@@ -50,9 +53,6 @@ public class Player
     
     public void newGame()
     {
-        deck.clearDeck();
-        hand.clearHand();
-        graveyard.clearGrave();
         for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
         {
             this.hand.add(this.deck.draw());
@@ -127,7 +127,7 @@ public class Player
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%-9s HEALTH/%-5d MANA/%d\n", this.name, this.health, this.manaAvailable));
+        sb.append(String.format("%-9s HEALTH(%d) MANA(%d)\n", this.name, this.health, this.manaAvailable));
 
         for (int i = 0; i < this.table.count() + 2; i++)
         {

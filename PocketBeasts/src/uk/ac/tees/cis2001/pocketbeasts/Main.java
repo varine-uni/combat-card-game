@@ -24,9 +24,11 @@ import java.util.Scanner;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * @author w9101532
  */
 public class Main
 {
+
     public static String getPrompt(String prompt, String[] validResponse)
     {
         System.out.print(prompt);
@@ -87,48 +89,56 @@ public class Main
             new Class_Netrunner("V"),
             new Class_CyberWarrior("Silverhand")
         };
-        
+
         newGame(players);
-        
+
         //TODO: Deal with this.
         //String outputMessage = "";
-        
         Boolean run = true;
         while (run)
         {
             for (Player player : players)
             {
                 int index = 0; //Index counter for knowing the second player's variable.
-                
+
                 if (index == 1) //Counter alternates between 1 and 0 for the player's array.
                 {
                     index = 0;
-                }
+                } 
                 else
+                {
                     index = 1;
-                
-                // Print initial play state
-                System.out.println(player);
-                
-                Scanner playerInput = new Scanner(System.in);
-                
-                System.out.println("Player: " + player.getName() + "turn");
-                System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
-                //TODO: Testing with hand but should be table.
-                for (int i = 0; i < players[index].getHand().getCards().size(); i++)
-                {   //The (i+1)+"." is just indexing each card in the loop starting from 1.
-                    System.out.println((i+1)+"."+players[index].getHand().getCards().get(i).toString());
                 }
-                
-                
-                playerInput.nextInt();
-                
+
+                /**
+                 * Create scanners for confirmation and player inputs.
+                 */
+                Scanner confirmation = new Scanner(System.in);
+                Scanner playerInput = new Scanner(System.in);
+
+                //Print initial play state
+                do
+                {
+                    System.out.println(player.toString());
+                    System.out.println("Player: " + player.getName() + "'s turn");
+                    System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
+                    //TODO: Testing with hand but should be table.
+                    for (int i = 0; i < players[index].getHand().getCards().size(); i++)
+                    {   //The (i+1)+"." is just indexing each card in the loop starting from 1.
+                        System.out.println((i + 1) + "." + players[index].getHand().getCards().get(i).toString());
+                    }
+
+                    int selectedEnemyCard = playerInput.nextInt();
+
+                } 
+                while (checkConfirmation(confirmation.nextLine())); //Check if confirmation says yes or no, otherwise method continues to loop.
+
                 if (!run)
                 {
                     break;
                 }
 
-                // Print final play state
+                //Print final play state
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println(player);
             }
@@ -136,12 +146,37 @@ public class Main
 
         //System.out.println(outputMessage);
     }
-    
+
     public static void newGame(Player[] playerArray)
     {
         for (Player players : playerArray)
         {
             players.newGame();
         }
+    }
+
+    /**
+     * Method checks input for yes or no string. If anything else, will
+     * repeat itself till an appropriate response is put in.
+     * @param input     Text to enter from confirmation scanner.
+     * @return          Returns true or false (yes and no respectively).
+     */
+    public static boolean checkConfirmation(String input)
+    {
+        while (true)
+        {
+            if (input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("y"))
+            {
+                return true;
+            }
+            else if (input.equalsIgnoreCase("No") || input.equalsIgnoreCase("n"))
+            {
+                return false;
+            } 
+            else
+            {
+                System.out.println("Please enter an appropriate input. (Y/Yes or N/No)");
+            }
+        }  
     }
 }

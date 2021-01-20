@@ -20,6 +20,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author James Fairbairn
  * @author Steven Mead
+ * @author w9101532
  *
  * Card object class. All cards are based on this object.
  */
