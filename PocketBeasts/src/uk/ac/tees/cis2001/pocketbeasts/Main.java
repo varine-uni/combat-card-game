@@ -113,25 +113,42 @@ public class Main
                 /**
                  * Create scanners for confirmation and player inputs.
                  */
-                Scanner confirmation = new Scanner(System.in);
+                Scanner confirmationInput = new Scanner(System.in);
                 Scanner playerInput = new Scanner(System.in);
 
                 //Print initial play state
+                System.out.println(player.toString());
+                
                 do
                 {
-                    System.out.println(player.toString());
+                    System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
+                    System.out.println("1. Access deck\n2. Play turn");
+                    
+                    checkPlayerInput(playerInput.nextInt(), 2); //Max input is two as there are only two available options.
+                    
+                    System.out.println("Are you sure?");
+                }
+                while (!checkConfirmation(confirmationInput.nextLine()));
+                
+                do
+                {
+                    confirmationInput.reset(); //Free up buffer for next input.
+                    
                     System.out.println("Player: " + player.getName() + "'s turn");
-                    System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards on table\n");
+                    System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards currently on table\n");
+                    
                     //TODO: Testing with hand but should be table.
                     for (int i = 0; i < players[index].getHand().getCards().size(); i++)
-                    {   //The (i+1)+"." is just indexing each card in the loop starting from 1.
+                    {   
+                        //The (i+1)+"." is just indexing each card in the loop starting from 1.
                         System.out.println((i + 1) + "." + players[index].getHand().getCards().get(i).toString());
                     }
 
                     int selectedEnemyCard = playerInput.nextInt();
-
+                    
+                    System.out.println("Are you sure?");
                 } 
-                while (checkConfirmation(confirmation.nextLine())); //Check if confirmation says yes or no, otherwise method continues to loop.
+                while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
                 if (!run)
                 {
@@ -146,7 +163,11 @@ public class Main
 
         //System.out.println(outputMessage);
     }
-
+    
+    /**
+     * Gets the array of players, sets up a new game for them.
+     * @param playerArray   The player array.
+     */
     public static void newGame(Player[] playerArray)
     {
         for (Player players : playerArray)
@@ -158,7 +179,7 @@ public class Main
     /**
      * Method checks input for yes or no string. If anything else, will
      * repeat itself till an appropriate response is put in.
-     * @param input     Text to enter from confirmation scanner.
+     * @param input     Text to enter from confirmationInput scanner.
      * @return          Returns true or false (yes and no respectively).
      */
     public static boolean checkConfirmation(String input)
@@ -178,5 +199,26 @@ public class Main
                 System.out.println("Please enter an appropriate input. (Y/Yes or N/No)");
             }
         }  
+    }
+    
+    /**
+     * Players select certain choices via integers. If a number input is over
+     * the max input it'll repeat the method.
+     * @param input         Player's input.
+     * @param maxInput      Max input that can be entered and compared to first parameter.
+     */
+    public static void checkPlayerInput(int input, int maxInput)
+    {
+        while (true)
+        {
+            if (input <= maxInput)
+            {
+                return;
+            }
+            else
+            {
+                System.out.println("Please enter a number equal or less than" + maxInput);
+            }
+        }
     }
 }
