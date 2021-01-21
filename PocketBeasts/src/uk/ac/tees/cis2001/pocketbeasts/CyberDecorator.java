@@ -67,11 +67,10 @@ public abstract class CyberDecorator extends Card
      * is called on the client. This method is not in the Cybernetics class because
      * it's unnecessary - it doesn't do anything extra (which is contrasted to how important
      * setStrategy method is to be in the Cybernetics class.
-     * @param value     //TODO might remove. 
      */
     @Override
-    public void useStrategy(int value)
+    public void useStrategy()
     {
-        card.useStrategy(value);
+        card.useStrategy();
     }
 }

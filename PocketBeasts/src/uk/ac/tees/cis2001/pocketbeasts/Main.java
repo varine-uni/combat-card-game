@@ -28,62 +28,45 @@ import java.util.Scanner;
  */
 public class Main
 {
-
-    public static String getPrompt(String prompt, String[] validResponse)
-    {
-        System.out.print(prompt);
-
-        Scanner sc = new Scanner(System.in);
-        String response = sc.nextLine();
-
-        if (Arrays.stream(validResponse).anyMatch(response::equals))
-        {
-            return response;
-        }
-
-        return getPrompt(prompt, validResponse);
-    }
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args)
     {
-//        System.out.println("");
-//        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
-//        System.out.println("Welcome to PocketBeasts!");
-//        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
-//        System.out.println("");
-//        System.out.println("This basic console application tests our underlying software design patterns.");
-//        System.out.println("");
-//        System.out.println("Here's a key for each card:");
-//        System.out.println("");
-//        System.out.println("                             +-------+ ");
-//        System.out.println("M  = Mana Cost               |      M| ");
-//        System.out.println("ID = Card identifier:        |  ID   | ");
-//        System.out.println("A  = Attack:                 |       | ");
-//        System.out.println("H  = Health:                 |A     H| ");
-//        System.out.println("                             +-------+ ");
-//        System.out.println("");
-//        System.out.println("New players each start with 15 Health and 1 Mana to spend on playing cards.");
-//        System.out.println("At the start of the game each player draws 4 cards from their deck to hand.");
-//        System.out.println("");
-//        System.out.println("Players each take turns. Each turn consists four phases:");
-//        System.out.println("1. Add mana (mana increases by one each turn and replenishes in full).");
-//        System.out.println("2. Draw a card.");
-        //TODO: Remove step 3 of the game.
-//        System.out.println("3. Cycle through your cards in play (if any), choosing whether to attack.");
-//        System.out.println("   a. Attacking the other player directly with your card inflicts damage to their health.");
-//        System.out.println("      equal to the attack power of the card.");
-//        System.out.println("   b. Attacking another players beast will damage both cards (equal to their attack values).");
-//        System.out.println("   c. Any beast with <= 0 health is removed from the play field and placed into the graveyard.");
-//        System.out.println("4. Play cards from hand.");
-//        System.out.println("");
-//
-//        System.out.println("Press ENTER to continue...");
-//        Scanner sc = new Scanner(System.in);
-//        sc.nextLine();
-//        
+        System.out.println("");
+        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println("Welcome to PocketBeasts!");
+        System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println("");
+        System.out.println("This basic console application tests our underlying software design patterns.");
+        System.out.println("");
+        System.out.println("Here's a key for each card:");
+        System.out.println("");
+        System.out.println("                             +-------+ ");
+        System.out.println("M  = Mana Cost               |      M| ");
+        System.out.println("ID = Card identifier:        |  ID   | ");
+        System.out.println("A  = Attack:                 |       | ");
+        System.out.println("H  = Health:                 |A     H| ");
+        System.out.println("                             +-------+ ");
+        System.out.println("");
+        System.out.println("New players each start with 15 Health and 1 Mana to spend on playing cards.");
+        System.out.println("At the start of the game each player draws 4 cards from their deck to hand.");
+        System.out.println("");
+        System.out.println("Players each take turns. Each turn consists four phases:");
+        System.out.println("1. Add mana (mana increases by one each turn and replenishes in full).");
+        System.out.println("2. Draw a card.");
+        System.out.println("3. Choose a card (or the player) to attack.");
+        System.out.println("   a. Attacking the other player directly with your card inflicts damage to their health.");
+        System.out.println("      equal to the attack power of the card.");
+        System.out.println("   b. Attacking another players beast will damage both cards (equal to their attack values).");
+        System.out.println("   c. Any beast with <= 0 health is removed from the play field and placed into the graveyard.");
+        System.out.println("4. Play cards from hand.");
+        System.out.println("");
+
+        System.out.println("Press ENTER to continue...");
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+        
         Player[] players = new Player[]
         {
             new Class_Netrunner("V"),
@@ -92,16 +75,16 @@ public class Main
 
         newGame(players);
 
-        //TODO: Deal with this.
-        //String outputMessage = "";
         Boolean run = true;
         while (run)
         {
             for (Player player : players)
             {
-                int index = 0; //Index counter for knowing the second player's variable.
-
-                if (index == 1) //Counter alternates between 1 and 0 for the player's array.
+                //Index counter for knowing the second player's variable.
+                int index = 0; 
+                
+                //Counter alternates between 1 and 0 for the player's array.
+                if (index == 1) 
                 {
                     index = 0;
                 } 
@@ -110,33 +93,34 @@ public class Main
                     index = 1;
                 }
 
-                /**
-                 * Create scanners for confirmation and player inputs.
-                 */
+                
+                //Create scanners for confirmation and player inputs.
                 Scanner confirmationInput = new Scanner(System.in);
                 Scanner playerInput = new Scanner(System.in);
-
+                
+                for (int i = 0; i < 2; i++)
+                {
+                    players[i].addMana();
+                }
+                
                 //Print initial play state
                 System.out.println(player.toString());
                 
                 do //First stage
                 {
-                    confirmationInput.reset(); //Free up buffer for next input.
-                    playerInput.reset(); //Free up buffer for next input
+                    //Free up buffer for next input.
+                    confirmationInput.reset(); 
+                    
+                    //Free up buffer for next input
+                    playerInput.reset();
                     
                     while (true)
                     {
                         System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
                         System.out.println("1. Play turn\n2. Access card builder");
                         
-                        Card card = new Card();
-                        card = new Cybernetics(card, 1);
-                        //Action_Resurrect strategy = new Action_Resurrect();
-                        card.setStrategy(null);
-                        card.useStrategy(1);
-                        
-                        
-                        switch (checkPlayerInput(playerInput.nextInt(), 2)) //Max input is two as there are only two available options. Returns original input.
+                        //Max input is two as there are only two available options. Returns original input.
+                        switch (checkPlayerInput(playerInput.nextInt(), 2)) 
                         {
                             case 1:
                                 break;
@@ -164,20 +148,39 @@ public class Main
                 do //Second stage
                 {
                     confirmationInput.reset(); //Free up buffer for next input.
-                    playerInput.reset(); //Free up buffer for next input.
+
+                    System.out.println("Player: " + player.getName() + "'s turn\n");
+                    System.out.println(players[index]);
+                    System.out.println("Enemy's info above. Select your card.");
                     
-                    System.out.println("Player: " + player.getName() + "'s turn");
-                    System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards currently on table\n");
-                    
-                    //TODO: Testing with hand but should be table.
-                    for (int i = 0; i < players[index].getHand().getCards().size(); i++)
+                    //Shows your cards.
+                    for (int i = 0; i < player.getTable().getCards().size(); i++)
                     {   
                         //The (i+1)+"." is just indexing each card in the loop starting from 1.
-                        System.out.println((i + 1) + "." + players[index].getHand().getCards().get(i).toString());
+                        System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
                     }
-
-                    Card selectedEnemyCard = players[index].getTable().getCard(playerInput.nextInt()-1);  //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
                     
+                    //Free up buffer for next input.
+                    playerInput.reset(); 
+                    
+                    //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
+                    Card selectedCard = player.getTable().getCard(checkPlayerInput(playerInput.nextInt()-1, player.getTable().count()));
+                    
+                    //Shows enemies cards.
+                    for (int i = 0; i < players[index].getTable().getCards().size(); i++)
+                    {   
+                        //The (i+1)+"." is just indexing each card in the loop starting from 1.
+                        System.out.println((i + 1) + "." + players[index].getTable().getCards().get(i).toString());
+                    }
+                    
+                    //Free up buffer.
+                    playerInput.reset();
+                    
+                    //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
+                    Card selectedEnemyCard = players[index].getTable().getCard(checkPlayerInput(playerInput.nextInt()-1, player.getTable().count()));
+                    
+                    //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
+                    selectedCard.attack(selectedEnemyCard, player); 
                 } 
                 while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
@@ -191,8 +194,6 @@ public class Main
                 System.out.println(player);
             }
         }
-
-        //System.out.println(outputMessage);
     }
     
     /**
@@ -215,17 +216,22 @@ public class Main
     public static boolean cardBuilder(Player player)
     {
         System.out.println("Choose from the following options.");
-        System.out.println("1. Add cybernetics\n2. Exit"); //TODO: Redo this. For test currently.
+        System.out.println("1. Add cybernetics\n2. Exit");
         Scanner newInput = new Scanner(System.in);
         
-        if (checkPlayerInput(newInput.nextInt(), 2) == 1) //Choice 1 is to add cybernetics.
+        //Choice 1 is to add cybernetics.
+        if (checkPlayerInput(newInput.nextInt(), 2) == 1) 
         {   
-            newInput.reset(); //Clear buffer.
-
-            Card selectedCard = player.getHand().getCards().get(newInput.nextInt()); //Select card from hand.
+            //Clear buffer.
+            newInput.reset(); 
+            
+            //Select card from hand.
             //You can only upgrade cards that are in your hand.
-                    
-            CardBuilder builder = new CardBuilder(selectedCard); //Enter card into the card builder class.
+            Card selectedCard = player.getHand().getCards().get(newInput.nextInt()); 
+            
+            
+            //Enter card into the card builder class.
+            CardBuilder builder = new CardBuilder(selectedCard); 
         }
         else if (checkPlayerInput(newInput.nextInt(), 2) == 2) //Choice 2 is go back.
         {
@@ -284,10 +290,10 @@ public class Main
                 Scanner newInput = new Scanner(System.in);
                 input = newInput.nextInt();
                 
-                
-                continue; //Netbeans states it's an unneccessary statement but it isn't.
+                //Netbeans states it's an unneccessary statement but it isn't.
                 //Continue statement allows loop to start again for a valid input.
                 //Recursive method takes up more memory and can be used to bloat memory.
+                continue; 
             }
         }
     }

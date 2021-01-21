@@ -72,9 +72,12 @@ public class Deck
         return card;
     }
 
-    public void shuffle()
+    public void shuffle(int loops)
     {
-        Collections.shuffle(this.deck);
+        for (int i = 0; i < loops; i++)
+        {
+            Collections.shuffle(this.deck);
+        }
     }
     
     public int count() {

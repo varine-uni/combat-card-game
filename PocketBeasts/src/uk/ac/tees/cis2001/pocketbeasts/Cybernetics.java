@@ -35,6 +35,7 @@ public final class Cybernetics extends CyberDecorator
     public Cybernetics(Card card, int stratChoice)
     {
         super(card);
+        
         //Choice is chosen in the client.
         this.stratChoice = stratChoice;
     }

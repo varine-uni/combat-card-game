@@ -89,11 +89,24 @@ public class Card implements Comparable<Card>
      * Attack function for all cards. Dealing out damage will damage
      * the player's card.
      * @param enemyCard     Input the selected enemy card to deal damage to.
+     * @param player        Player is inputted to use removeMana method for using a card.
+     * @return              Returns true if the attack was successful. False otherwise.
      */
-    public void attack(Card enemyCard)
+    public boolean attack(Card enemyCard, Player player)
     {
-        enemyCard.damage(attack);
-        damage(enemyCard.getAttack());
+        boolean removeMana = player.removeMana(this.manaCost);
+        
+        if (removeMana == true)
+        {
+            enemyCard.damage(attack);
+            damage(enemyCard.getAttack());
+            
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     public void damage(int amount)
@@ -157,11 +170,15 @@ public class Card implements Comparable<Card>
         this.strategy = strategy;
     }
 
-    public void useStrategy(int value)
+    public void useStrategy()
     {
         System.out.println(strategy.toString());
     }
 
+    /**
+     * Displays information about each card in simple text.
+     * @return      return string of information. 
+     */
     @Override
     public String toString()
     {

@@ -53,13 +53,20 @@ public class Player
     
     public void newGame()
     {
-        for (int i = 0; i < 4; i++) //Will take the first 4 "weak" cards.
+        //Will take the first 2 "weak" cards and place them on the table.
+        for (int i = 0; i < 2; i++) 
+        {
+            this.table.add(deck.draw());
+        }
+        
+        //From now on, the cards taken from deck are random.
+        this.deck.shuffle(5); 
+        
+        //Takes two random cards in hand.
+        for (int i = 0; i < 2; i++) 
         {
             this.hand.add(this.deck.draw());
         }
-        this.deck.shuffle(); //From now on, the cards taken from deck are random.
-        
-        addMana(); //New game, add the initial amount of mana (1 point).   
     }
 
     public String getName()
@@ -67,6 +74,24 @@ public class Player
         return this.name;
     }
 
+    /**
+     * Method to deduct player's mana.
+     * @param manaCost      Cost of the card being used.
+     * @return              Returns true if successfully removed mana. False otherwise.
+     */
+    public boolean removeMana(int manaCost)
+    {
+        if (manaCost <= manaAvailable)
+        {
+            manaAvailable -= manaCost;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     public int getManaAvailable()
     {
         return this.manaAvailable;
@@ -129,7 +154,7 @@ public class Player
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-9s HEALTH(%d) MANA(%d)\n", this.name, this.health, this.manaAvailable));
 
-        for (int i = 0; i < this.table.count() + 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             sb.append("+-------+ ");
         }
@@ -139,47 +164,37 @@ public class Player
         {
             sb.append("|       | ");
         }
-        for (int i = 0; i < this.table.count(); i++)
-        {
-            sb.append(String.format("|%7d| ", this.table.getCard(i).getManaCost()));
-        }
+
         sb.append("\n");
 
         sb.append("| DECK  | ");
         sb.append("| GRAVE | ");
-        for (int i = 0; i < this.table.count(); i++)
-        {
-            sb.append(String.format("|  %-5s| ", this.table.getCard(i).getId()));
-        }
+
         sb.append("\n");
 
         sb.append(String.format("| %-6d| ", this.deck.count()));
         sb.append(String.format("| %-6d| ", this.graveyard.count()));
-        for (int i = 0; i < this.table.count(); i++)
-        {
-            sb.append("|       | ");
-        }
+
         sb.append("\n");
 
         for (int i = 0; i < 2; i++)
         {
             sb.append("|       | ");
         }
-        for (int i = 0; i < this.table.count(); i++)
-        {
-            sb.append(String.format("|%-2d %4d| ", this.table.getCard(i).getAttack(), this.table.getCard(i).getHealth()));
-        }
+
         sb.append("\n");
 
-        for (int i = 0; i < this.table.count() + 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             sb.append("+-------+ ");
         }
         sb.append("\n");
         sb.append(String.format("%d card(s) in hand.\n", this.hand.count()));
         sb.append("\n");
-
         sb.append(this.hand.toString());
+        sb.append("\n");
+        sb.append(String.format("%d card(s) on table. \n", this.table.count()));
+        sb.append(this.table.toString());
 
         return sb.toString();
     }
