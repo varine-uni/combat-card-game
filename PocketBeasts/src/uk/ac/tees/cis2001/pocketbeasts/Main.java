@@ -151,36 +151,18 @@ public class Main
 
                     System.out.println("Player: " + player.getName() + "'s turn\n");
                     System.out.println(players[index]);
-                    System.out.println("Enemy's info above. Select your card.");
                     
-                    //Shows your cards.
-                    for (int i = 0; i < player.getTable().getCards().size(); i++)
-                    {   
-                        //The (i+1)+"." is just indexing each card in the loop starting from 1.
-                        System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
-                    }
+                    
                     
                     //Free up buffer for next input.
                     playerInput.reset(); 
                     
-                    //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-                    Card selectedCard = player.getTable().getCard(checkPlayerInput(playerInput.nextInt()-1, player.getTable().count()));
                     
-                    //Shows enemies cards.
-                    for (int i = 0; i < players[index].getTable().getCards().size(); i++)
-                    {   
-                        //The (i+1)+"." is just indexing each card in the loop starting from 1.
-                        System.out.println((i + 1) + "." + players[index].getTable().getCards().get(i).toString());
-                    }
                     
-                    //Free up buffer.
-                    playerInput.reset();
-                    
-                    //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-                    Card selectedEnemyCard = players[index].getTable().getCard(checkPlayerInput(playerInput.nextInt()-1, player.getTable().count()));
-                    
-                    //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
-                    selectedCard.attack(selectedEnemyCard, player); 
+                    //attackSequence(players[index]);
+                        
+
+                    System.out.println("End turn?");
                 } 
                 while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
@@ -205,6 +187,91 @@ public class Main
         for (Player players : playerArray)
         {
             players.newGame();
+        }
+    }
+    
+    /**
+     * Produces a list of the enemy's cards. Allows an input to select a card to
+     * attack. The player can also choose the enemy player if wanted.
+     * @param enemy     The enemy player object.
+     * @param input     Input to choose enemy card.
+     * @return          Returns the chosen card.
+     */
+    public static Card selectEnemy(Player enemy, int input)
+    {
+        System.out.println("Select an enemy card.");
+
+        //Shows enemies cards.
+        for (int i = 0; i < enemy.getTable().getCards().size(); i++)
+        {
+            //The (i+1)+"." is just indexing each card in the loop starting from 1.
+            System.out.println((i + 1) + "." + enemy.getTable().getCards().get(i).toString());
+        }
+        
+        //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
+        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input - 1, enemy.getTable().count()));
+        
+        return selectedEnemyCard;
+    }
+    
+    /**
+     * Produces a list of the player's cards. Allows an input to select a card to
+     * use (attack or action).
+     * @param player    The player object.
+     * @param input     Input to choose a card.
+     * @return          Returns the chosen card.
+     */
+    public static Card selectCard(Player player, int input)
+    {
+        System.out.println("Select a card from your table");
+        
+        //Shows your cards.
+        for (int i = 0; i < player.getTable().getCards().size(); i++)
+        {
+            //The (i+1)+"." is just indexing each card in the loop starting from 1.
+            System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
+        }
+        
+        //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
+        Card selectedCard = player.getTable().getCard(checkPlayerInput(input - 1, player.getTable().count()));
+    }
+    
+    
+    public static void attackSequence(Player enemy, Player player, Scanner keyboard)
+    {
+        
+
+        //Free up buffer.
+        keyboard.reset();
+
+        
+
+        //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
+        //Since a successful attack returns true, it'll loop until you cannot attack any longer (no mana).
+        while (selectedCard.attack(selectedEnemyCard, player))
+        {
+            System.out.println("You dealt " + selectedCard.getAttack() + " damage to " + selectedEnemyCard.getName());
+            System.out.println("Select new card?");
+            confirmationInput.reset();
+
+            //Check if yes/no answer is valid.
+            if (checkConfirmation(confirmationInput.nextLine()))
+            {
+                //Free up buffer.
+                playerInput.reset();
+
+                //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
+                selectedCard = player.getTable().getCard(checkPlayerInput(playerInput.nextInt() - 1, player.getTable().count()));
+            }
+
+            System.out.println("Select enemy card to attack.");
+
+            //Free up buffer.
+            playerInput.reset();
+
+            //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
+            selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(playerInput.nextInt() - 1, player.getTable().count()));
+
         }
     }
     
