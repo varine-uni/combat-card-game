@@ -16,17 +16,19 @@
  */
 package uk.ac.tees.cis2001.pocketbeasts;
 
+import java.util.ArrayList;
+
 /**
- *
+ * Close to what the main deck is suppose to be. But takes in cybernetics cards.
+ * (Removed methods such as shuffle because upgrading cards isn't random).
  * @author w9101532
  */
-public class Action_Resurrect implements CardStrategy
-{   
-    @Override
-    public String action()
-    {
-        System.out.println("Resurrect");
-        return "Action performed";
-    }
+public class CyberDeck
+{
+    ArrayList<Cybernetics> cyberneticsCards = new ArrayList<>();
     
+    CyberDeck()
+    {
+        
+    }
 }

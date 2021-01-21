@@ -22,5 +22,5 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public interface CardStrategy
 {
-    public String action(int value);
+    public String action();
 }

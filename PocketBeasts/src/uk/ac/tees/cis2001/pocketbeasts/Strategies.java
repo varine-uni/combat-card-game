@@ -17,16 +17,33 @@
 package uk.ac.tees.cis2001.pocketbeasts;
 
 /**
- *
+ * This contains all the strategies that can be used by a card.
+ * It's encapsulated in a class to allow easier output using conditionals.
  * @author w9101532
  */
-public class Action_Resurrect implements CardStrategy
-{   
-    @Override
-    public String action()
-    {
-        System.out.println("Resurrect");
-        return "Action performed";
-    }
+public class Strategies
+{
+    CardStrategy strategy = null;
+    Action_Resurrect resurrect = new Action_Resurrect();
+    Action_InstaKill instaKill = new Action_InstaKill();
     
+    public CardStrategy selectStrategy(int input)
+    {
+        switch (input)
+        {
+            case 1:
+                strategy = resurrect;
+                break;
+
+            case 2:
+                strategy = instaKill;
+                break;
+                
+            default:
+                strategy = null;
+                break;
+        }
+        
+        return strategy;
+    }
 }

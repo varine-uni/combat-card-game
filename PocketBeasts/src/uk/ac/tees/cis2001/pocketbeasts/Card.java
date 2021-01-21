@@ -157,9 +157,9 @@ public class Card implements Comparable<Card>
         this.strategy = strategy;
     }
 
-    public void useAction(int value)
+    public void useStrategy(int value)
     {
-        strategy.action(value);
+        System.out.println(strategy.toString());
     }
 
     @Override

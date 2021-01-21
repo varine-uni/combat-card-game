@@ -20,12 +20,13 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Action_Resurrect implements CardStrategy
-{   
+public class Action_InstaKill implements CardStrategy
+{
+
     @Override
     public String action()
     {
-        System.out.println("Resurrect");
+        System.out.println("Killed enemy instantly");
         return "Action performed";
     }
     

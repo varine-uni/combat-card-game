@@ -24,22 +24,30 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * card object. This is possible if a card can ask for a cybernetic arm,
  * leg, or misc.
  */
-public class Cybernetics extends CyberDecorator 
+public final class Cybernetics extends CyberDecorator 
 {
     public boolean isLeg = false;
     public boolean isArm = false;
     public boolean isMisc = false;
+    Strategies strats = new Strategies();
+    int stratChoice;
     
-    public Cybernetics(Card card, int attack, int health)
+    public Cybernetics(Card card, int stratChoice)
     {
         super(card);
-        this.attack = attack;
-        this.health = health;
+        //Choice is chosen in the client.
+        this.stratChoice = stratChoice;
     }
     
-    public String getPartType()
+    /**
+     * Overridden card method. This method refers right back to the decorator's version
+     * of this method but inputs a strategy before the decorator's version is called.
+     * @param strat     Due to the nature of this method, this parameter isn't used in this class. 
+     */
+    @Override
+    public void setStrategy(CardStrategy strat)
     {
-        String output = "Is leg? : " + isLeg + "\nIs arm? : " + isArm + "\nIs Misc? : " + isMisc;
-        return output;
+        //Super here refers to the decorator.
+        super.card.setStrategy(strats.selectStrategy(this.stratChoice));
     }
 }

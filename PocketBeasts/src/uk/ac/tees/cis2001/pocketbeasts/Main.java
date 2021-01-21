@@ -129,6 +129,13 @@ public class Main
                         System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
                         System.out.println("1. Play turn\n2. Access card builder");
                         
+                        Card card = new Card();
+                        card = new Cybernetics(card, 1);
+                        //Action_Resurrect strategy = new Action_Resurrect();
+                        card.setStrategy(null);
+                        card.useStrategy(1);
+                        
+                        
                         switch (checkPlayerInput(playerInput.nextInt(), 2)) //Max input is two as there are only two available options. Returns original input.
                         {
                             case 1:
@@ -212,8 +219,13 @@ public class Main
         Scanner newInput = new Scanner(System.in);
         
         if (checkPlayerInput(newInput.nextInt(), 2) == 1) //Choice 1 is to add cybernetics.
-        {
-            
+        {   
+            newInput.reset(); //Clear buffer.
+
+            Card selectedCard = player.getHand().getCards().get(newInput.nextInt()); //Select card from hand.
+            //You can only upgrade cards that are in your hand.
+                    
+            CardBuilder builder = new CardBuilder(selectedCard); //Enter card into the card builder class.
         }
         else if (checkPlayerInput(newInput.nextInt(), 2) == 2) //Choice 2 is go back.
         {
