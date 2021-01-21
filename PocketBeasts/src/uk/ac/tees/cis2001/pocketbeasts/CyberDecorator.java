@@ -31,11 +31,13 @@ public abstract class CyberDecorator extends Card
         this.card = card;
     }
     
+    @Override
     public int getAttack()
     {
         return card.getAttack() + this.attack;
     }
     
+    @Override
     public int getHealth()
     {
         return card.getHealth() + this.health;

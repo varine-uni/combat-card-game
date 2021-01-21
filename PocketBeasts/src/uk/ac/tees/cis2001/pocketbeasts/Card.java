@@ -85,6 +85,17 @@ public class Card implements Comparable<Card>
         return this.health;
     }
 
+    /**
+     * Attack function for all cards. Dealing out damage will damage
+     * the player's card.
+     * @param enemyCard     Input the selected enemy card to deal damage to.
+     */
+    public void attack(Card enemyCard)
+    {
+        enemyCard.damage(attack);
+        damage(enemyCard.getAttack());
+    }
+    
     public void damage(int amount)
     {
         this.health -= amount;

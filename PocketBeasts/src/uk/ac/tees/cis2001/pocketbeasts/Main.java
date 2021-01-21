@@ -119,20 +119,45 @@ public class Main
                 //Print initial play state
                 System.out.println(player.toString());
                 
-                do
-                {
-                    System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
-                    System.out.println("1. Access deck\n2. Play turn");
-                    
-                    checkPlayerInput(playerInput.nextInt(), 2); //Max input is two as there are only two available options.
-                    
-                    System.out.println("Are you sure?");
-                }
-                while (!checkConfirmation(confirmationInput.nextLine()));
-                
-                do
+                do //First stage
                 {
                     confirmationInput.reset(); //Free up buffer for next input.
+                    playerInput.reset(); //Free up buffer for next input
+                    
+                    while (true)
+                    {
+                        System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
+                        System.out.println("1. Play turn\n2. Access card builder");
+                        
+                        switch (checkPlayerInput(playerInput.nextInt(), 2)) //Max input is two as there are only two available options. Returns original input.
+                        {
+                            case 1:
+                                break;
+
+                            case 2:
+                                if (cardBuilder(player) == false) //If player decides to quit the card builder: repeat options.
+                                {
+                                    continue;
+                                }
+                                else //Else continue as normal.
+                                {
+                                    break;
+                                }
+                                    
+                            default:
+                                System.out.println("Going back2.");
+                                continue;       
+                        }
+                        break;
+                    }   
+                    System.out.println("Are you sure?");
+                }
+                while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
+
+                do //Second stage
+                {
+                    confirmationInput.reset(); //Free up buffer for next input.
+                    playerInput.reset(); //Free up buffer for next input.
                     
                     System.out.println("Player: " + player.getName() + "'s turn");
                     System.out.println("Which card will you attack?\n" + players[index].getName() + "'s cards currently on table\n");
@@ -144,9 +169,8 @@ public class Main
                         System.out.println((i + 1) + "." + players[index].getHand().getCards().get(i).toString());
                     }
 
-                    int selectedEnemyCard = playerInput.nextInt();
+                    Card selectedEnemyCard = players[index].getTable().getCard(playerInput.nextInt()-1);  //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
                     
-                    System.out.println("Are you sure?");
                 } 
                 while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
@@ -175,7 +199,30 @@ public class Main
             players.newGame();
         }
     }
-
+    
+    /**
+     * Add cybernetics to player's cards.
+     * @param player    Player whose cards will be modified.
+     * @return          Returns false if exit. Returns true to continue rest of code.
+     */
+    public static boolean cardBuilder(Player player)
+    {
+        System.out.println("Choose from the following options.");
+        System.out.println("1. Add cybernetics\n2. Exit"); //TODO: Redo this. For test currently.
+        Scanner newInput = new Scanner(System.in);
+        
+        if (checkPlayerInput(newInput.nextInt(), 2) == 1) //Choice 1 is to add cybernetics.
+        {
+            
+        }
+        else if (checkPlayerInput(newInput.nextInt(), 2) == 2) //Choice 2 is go back.
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
     /**
      * Method checks input for yes or no string. If anything else, will
      * repeat itself till an appropriate response is put in.
@@ -197,6 +244,8 @@ public class Main
             else
             {
                 System.out.println("Please enter an appropriate input. (Y/Yes or N/No)");
+                Scanner newInput = new Scanner(System.in);
+                input = newInput.nextLine();
             }
         }  
     }
@@ -206,18 +255,27 @@ public class Main
      * the max input it'll repeat the method.
      * @param input         Player's input.
      * @param maxInput      Max input that can be entered and compared to first parameter.
+     * @return              Returns original input if condition is true.
      */
-    public static void checkPlayerInput(int input, int maxInput)
+    public static int checkPlayerInput(int input, int maxInput)
     {
         while (true)
         {
             if (input <= maxInput)
             {
-                return;
+                return input;
             }
             else
             {
-                System.out.println("Please enter a number equal or less than" + maxInput);
+                System.out.println("Please enter a number equal or less than " + maxInput);
+                
+                Scanner newInput = new Scanner(System.in);
+                input = newInput.nextInt();
+                
+                
+                continue; //Netbeans states it's an unneccessary statement but it isn't.
+                //Continue statement allows loop to start again for a valid input.
+                //Recursive method takes up more memory and can be used to bloat memory.
             }
         }
     }
