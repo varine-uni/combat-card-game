@@ -72,7 +72,11 @@ public class Main
             new Class_CyberWarrior("Silverhand")
         };
 
-        newGame(players);
+        //Some methods when static causes a lot of problems. Including selecting cards and fighting them.
+        Main main = new Main();
+        
+        //Set up the intial game for the players.
+        main.newGame(players);
 
         Boolean run = true;
         while (run)
@@ -110,13 +114,13 @@ public class Main
                         System.out.println("1. Play turn\n2. Access card builder");
                         
                         //Max input is two as there are only two available options. Returns original input.
-                        switch (checkPlayerInput(2)) 
+                        switch (main.checkPlayerInput(2)) 
                         {
                             case 1:
                                 break;
 
                             case 2:
-                                if (cardBuilder(player) == false) //If player decides to quit the card builder: repeat options.
+                                if (main.cardBuilder(player) == false) //If player decides to quit the card builder: repeat options.
                                 {
                                     continue;
                                 }
@@ -133,7 +137,7 @@ public class Main
                     }   
                     System.out.println("Are you sure?");
                 }
-                while (!checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
+                while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
                 
                 //Second stage.
                 do 
@@ -141,11 +145,13 @@ public class Main
                     System.out.println("Player: " + player.getName() + "'s turn\n");
                     System.out.println(enemy);
                     
-                    attackSequence(selectCard(player), selectEnemy(enemy), player, enemy);
+                    main.selectCard(player);
+                    
+                    main.attackSequence(main.selectCard(player), main.selectEnemy(enemy), player, enemy);
                     
                     System.out.println("Are you sure?");
                 } 
-                while (!checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
+                while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
                 if (!run)
                 {
@@ -163,7 +169,7 @@ public class Main
      * Gets the array of players, sets up a new game for them.
      * @param playerArray   The player array.
      */
-    public static void newGame(Player[] playerArray)
+    private void newGame(Player[] playerArray)
     {
         for (Player players : playerArray)
         {
@@ -177,7 +183,7 @@ public class Main
      * @param enemy     The enemy player object.
      * @return          Returns the chosen card.
      */
-    public static Card selectEnemy(Player enemy)
+    private Card selectEnemy(Player enemy)
     {
         System.out.println("Select an enemy card from their table.");
 
@@ -200,7 +206,7 @@ public class Main
      * @param player    The player object.
      * @return          Returns the chosen card.
      */
-    public static Card selectCard(Player player)
+    private Card selectCard(Player player)
     {
         System.out.println("Select a card from your table.");
         
@@ -226,7 +232,7 @@ public class Main
      * @param player        Player reference for multiple functions.
      * @param enemy         Enemy reference for multiple functions.
      */
-    public static void attackSequence(Card playerCard, Card enemyCard, Player player, Player enemy)
+    private void attackSequence(Card playerCard, Card enemyCard, Player player, Player enemy)
     {
         //Create input for player's decision.
         Scanner newInput = new Scanner(System.in);
@@ -285,7 +291,7 @@ public class Main
      * @param player    Player whose cards will be modified.
      * @return          Returns false if exit. Returns true to continue rest of code.
      */
-    public static boolean cardBuilder(Player player)
+    private boolean cardBuilder(Player player)
     {
         System.out.println("Choose from the following options.");
         System.out.println("1. Add cybernetics\n2. Exit");
@@ -318,7 +324,7 @@ public class Main
      * repeat itself till an appropriate response is put in.
      * @return          Returns true or false (yes and no respectively).
      */
-    public static boolean checkConfirmation()
+    private boolean checkConfirmation()
     {
         Scanner newInput = new Scanner(System.in);
         String input = newInput.nextLine();
@@ -348,7 +354,7 @@ public class Main
      * @param maxInput      Max input that can be entered and compared to first parameter.
      * @return              Returns original input if condition is true.
      */
-    public static int checkPlayerInput(int maxInput)
+    private int checkPlayerInput(int maxInput)
     {
         Scanner newInput = new Scanner(System.in);
         int input = newInput.nextInt();
