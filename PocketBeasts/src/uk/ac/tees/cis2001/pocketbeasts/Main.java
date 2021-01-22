@@ -67,6 +67,7 @@ public class Main
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
         
+        //TODO: Allows name change and class selection.
         Player[] players = new Player[]
         {
             new Class_Netrunner("V"),
@@ -145,7 +146,7 @@ public class Main
                     }   
                     System.out.println("Are you sure?");
                 }
-                while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
+                while (!checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
                 
                 //Second stage.
                 do 
@@ -166,7 +167,7 @@ public class Main
 
                     System.out.println("End turn?");
                 } 
-                while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise method continues to loop.
+                while (!checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
                 if (!run)
                 {
@@ -253,41 +254,31 @@ public class Main
     }
     
     
-    public static void attackSequence(Player enemy, Player player, Scanner keyboard)
+    /**
+     * This method inputs the player and their card, and the enemy's card. The player
+     * can choose to end their turn or continue attacking if they have the right mana.
+     * @param playerCard    
+     * @param enemyCard
+     * @param player 
+     */
+    public static void attackSequence(Card playerCard, Card enemyCard, Player player)
     {
-        
-
-        //Free up buffer.
-        keyboard.reset();
-
         
 
         //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
         //Since a successful attack returns true, it'll loop until you cannot attack any longer (no mana).
-        while (selectedCard.attack(selectedEnemyCard, player))
+        while (playerCard.attack(enemyCard, player))
         {
-            System.out.println("You dealt " + selectedCard.getAttack() + " damage to " + selectedEnemyCard.getName());
+            System.out.println("You dealt " + playerCard.getAttack() + " damage to " + enemyCard.getName());
             System.out.println("Select new card?");
-            confirmationInput.reset();
 
-            //Check if yes/no answer is valid.
-            if (checkConfirmation(confirmationInput.nextLine()))
+            //Yes or no?
+            if (checkConfirmation())
             {
-                //Free up buffer.
-                playerInput.reset();
 
-                //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-                selectedCard = player.getTable().getCard(checkPlayerInput(playerInput.nextInt() - 1, player.getTable().count()));
             }
 
             System.out.println("Select enemy card to attack.");
-
-            //Free up buffer.
-            playerInput.reset();
-
-            //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-            selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(playerInput.nextInt() - 1, player.getTable().count()));
-
         }
     }
     
@@ -327,11 +318,13 @@ public class Main
     /**
      * Method checks input for yes or no string. If anything else, will
      * repeat itself till an appropriate response is put in.
-     * @param input     Text to enter from confirmationInput scanner.
      * @return          Returns true or false (yes and no respectively).
      */
-    public static boolean checkConfirmation(String input)
+    public static boolean checkConfirmation()
     {
+        Scanner newInput = new Scanner(System.in);
+        String input = newInput.nextLine();
+        
         while (true)
         {
             if (input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("y"))
@@ -345,7 +338,7 @@ public class Main
             else
             {
                 System.out.println("Please enter an appropriate input. (Y/Yes or N/No)");
-                Scanner newInput = new Scanner(System.in);
+                newInput.reset();
                 input = newInput.nextLine();
             }
         }  
@@ -373,7 +366,7 @@ public class Main
                 Scanner newInput = new Scanner(System.in);
                 input = newInput.nextInt();
                 
-                //Netbeans states it's an unneccessary statement but it isn't.
+                //Netbeans states this is an unneccessary statement but it isn't.
                 //Continue statement allows loop to start again for a valid input.
                 //Recursive method takes up more memory and can be used to bloat memory.
                 continue; 
