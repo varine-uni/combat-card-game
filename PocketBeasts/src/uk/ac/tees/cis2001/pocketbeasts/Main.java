@@ -47,8 +47,9 @@ public class Main
         System.out.println("H  = Health:                 |A     H| ");
         System.out.println("                             +-------+ ");
         System.out.println("");
-        System.out.println("New players each start with 15 Health and 1 Mana to spend on playing cards.");
-        System.out.println("At the start of the game each player draws 4 cards from their deck to hand.");
+        System.out.println("New players each start with 15 Health and 3 Mana to spend on playing cards.");
+        System.out.println("At the start of the game each player draws 5 cards from their deck to hand.");
+        System.out.println("Two of those cards are automatically placed on the table.");
         System.out.println("");
         System.out.println("Players each take turns. Each turn consists four phases:");
         System.out.println("1. Add mana (mana increases by one each turn and replenishes in full).");
@@ -102,6 +103,9 @@ public class Main
                 //Add mana to current player. (1 every round).
                 player.addMana();
                 
+                //After confirming your turn. Draw a cand into hand.
+                player.drawCard();
+                
                 //Print initial play state
                 System.out.println(player.toString());
                 
@@ -139,13 +143,13 @@ public class Main
                 }
                 while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
                 
+                
+                
                 //Second stage.
                 do 
                 {
                     System.out.println("Player: " + player.getName() + "'s turn\n");
                     System.out.println(enemy);
-                    
-                    main.selectCard(player);
                     
                     main.attackSequence(main.selectCard(player), main.selectEnemy(enemy), player, enemy);
                     
@@ -226,7 +230,7 @@ public class Main
     
     /**
      * This method inputs the player and their card, and the enemy's card. The player
-     * can choose to end their turn or continue attacking if they have the right mana.
+     * can choose to end their turn or continue attacking.
      * @param playerCard    Player's selected card.
      * @param enemyCard     Enemy's selected card.
      * @param player        Player reference for multiple functions.
@@ -239,7 +243,7 @@ public class Main
         
         //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
         //Since a successful attack returns true, it'll loop until you cannot attack any longer (no mana).
-        while (playerCard.attack(enemyCard, player))
+        while (playerCard.attack(enemyCard, player, enemy))
         {
             System.out.println("You dealt " + playerCard.getAttack() + " damage to " + enemyCard.getName());
             System.out.println("Enemy has (" + player.getHealth() + ") HP");

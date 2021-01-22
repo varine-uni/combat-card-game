@@ -89,30 +89,32 @@ public class Card implements Comparable<Card>
      * Attack function for all cards. Dealing out damage will damage
      * the player's card.
      * @param enemyCard     Input the selected enemy card to deal damage to.
-     * @param player        Player is inputted to use removeMana method for using a card.
-     * @return              Returns true if the attack was successful. False otherwise.
+     * @param player        Player is inputted to access table and graveyard in the damage method.
+     * @param enemy         Enemy to access enemy's table and graveyard. Because cards damage each other in one go.
      */
-    public boolean attack(Card enemyCard, Player player)
-    {
-        boolean removeMana = player.removeMana(this.manaCost);
-        
-        if (removeMana == true)
-        {
-            enemyCard.damage(attack);
-            damage(enemyCard.getAttack());
-            
-            return true;
-        }
-        else
-        {
-            System.out.println("You do not have enough mana.");
-            return false;
-        }
+    public void attack(Card enemyCard, Player player, Player enemy)
+    {   
+        enemyCard.damage(attack, enemy);
+        damage(enemyCard.getAttack(), player);
     }
     
-    public void damage(int amount)
+    /**
+     * Deducts from available HP.
+     * @param amount    Damage dealt.
+     * @param player    Player to access table and graveyard.    
+     */
+    public void damage(int amount, Player player)
     {
         this.health -= amount;
+        
+        if (health <= 0)
+        {
+            //Health wont appear in negatives on death.
+            health = 0;
+            
+            player.graveyard.add(this);
+            player.table.remove(this);
+        }
     }
     
     public int getArmSlots()

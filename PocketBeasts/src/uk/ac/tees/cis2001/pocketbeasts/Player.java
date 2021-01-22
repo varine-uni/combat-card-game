@@ -44,7 +44,7 @@ public class Player
     {
         this.name = name;
         this.manaAvailable = 0;
-        this.currentMaxMana = 0;
+        this.currentMaxMana = 2;
         this.health = 15;
         this.deck = new Deck();
         this.hand = new Hand();
