@@ -98,6 +98,7 @@ public class Main
                 Scanner confirmationInput = new Scanner(System.in);
                 Scanner playerInput = new Scanner(System.in);
                 
+                //Add mana every round.
                 for (int i = 0; i < 2; i++)
                 {
                     players[i].addMana();
@@ -106,7 +107,8 @@ public class Main
                 //Print initial play state
                 System.out.println(player.toString());
                 
-                do //First stage
+                //First stage.
+                do 
                 {
                     //Free up buffer for next input.
                     confirmationInput.reset(); 
@@ -144,8 +146,9 @@ public class Main
                     System.out.println("Are you sure?");
                 }
                 while (!checkConfirmation(confirmationInput.nextLine())); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
-
-                do //Second stage
+                
+                //Second stage.
+                do 
                 {
                     confirmationInput.reset(); //Free up buffer for next input.
 
@@ -154,8 +157,7 @@ public class Main
                     
                     
                     
-                    //Free up buffer for next input.
-                    playerInput.reset(); 
+                    
                     
                     
                     
@@ -197,8 +199,11 @@ public class Main
      * @param input     Input to choose enemy card.
      * @return          Returns the chosen card.
      */
-    public static Card selectEnemy(Player enemy, int input)
+    public static Card selectEnemy(Player enemy, Scanner input)
     {
+        //Free up buffer for next input.
+        input.reset(); 
+                    
         System.out.println("Select an enemy card.");
 
         //Shows enemies cards.
@@ -209,7 +214,10 @@ public class Main
         }
         
         //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input - 1, enemy.getTable().count()));
+        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input.nextInt() - 1, enemy.getTable().count()));
+        
+        //Free up buffer for next input.
+        input.reset(); 
         
         return selectedEnemyCard;
     }
@@ -221,8 +229,11 @@ public class Main
      * @param input     Input to choose a card.
      * @return          Returns the chosen card.
      */
-    public static Card selectCard(Player player, int input)
+    public static Card selectCard(Player player, Scanner input)
     {
+        //Free up buffer for next input.
+        input.reset(); 
+        
         System.out.println("Select a card from your table");
         
         //Shows your cards.
@@ -233,7 +244,12 @@ public class Main
         }
         
         //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-        Card selectedCard = player.getTable().getCard(checkPlayerInput(input - 1, player.getTable().count()));
+        Card selectedCard = player.getTable().getCard(checkPlayerInput(input.nextInt() - 1, player.getTable().count()));
+        
+        //Free up buffer for next input.
+        input.reset(); 
+        
+        return selectedCard;
     }
     
     
