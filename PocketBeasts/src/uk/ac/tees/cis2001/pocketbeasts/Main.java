@@ -92,16 +92,11 @@ public class Main
                     index = 1;
                 }
 
+                //Enemy player variable.
+                Player enemy = players[index];
                 
-                //Create scanners for confirmation and player inputs.
-                Scanner confirmationInput = new Scanner(System.in);
-                Scanner playerInput = new Scanner(System.in);
-                
-                //Add mana every round.
-                for (int i = 0; i < 2; i++)
-                {
-                    players[i].addMana();
-                }
+                //Add mana to current player. (1 every round).
+                player.addMana();
                 
                 //Print initial play state
                 System.out.println(player.toString());
@@ -109,19 +104,13 @@ public class Main
                 //First stage.
                 do 
                 {
-                    //Free up buffer for next input.
-                    confirmationInput.reset(); 
-                    
-                    //Free up buffer for next input
-                    playerInput.reset();
-                    
                     while (true)
                     {
                         System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
                         System.out.println("1. Play turn\n2. Access card builder");
                         
                         //Max input is two as there are only two available options. Returns original input.
-                        switch (checkPlayerInput(playerInput.nextInt(), 2)) 
+                        switch (checkPlayerInput(2)) 
                         {
                             case 1:
                                 break;
@@ -149,21 +138,12 @@ public class Main
                 //Second stage.
                 do 
                 {
-                    confirmationInput.reset(); //Free up buffer for next input.
-
                     System.out.println("Player: " + player.getName() + "'s turn\n");
-                    System.out.println(players[index]);
+                    System.out.println(enemy);
                     
+                    attackSequence(selectCard(player), selectEnemy(enemy), player, enemy);
                     
-                    
-                    
-                    
-                    
-                    
-                    //attackSequence(players[index]);
-                        
-
-                    System.out.println("End turn?");
+                    System.out.println("Are you sure?");
                 } 
                 while (!checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
 
@@ -207,13 +187,9 @@ public class Main
             //The (i+1)+"." is just indexing each card in the loop starting from 1.
             System.out.println((i + 1) + "." + enemy.getTable().getCards().get(i).toString());
         }
-        
-        //Create a scanner to allow integer input for selection.
-        Scanner newInput = new Scanner(System.in);
-        int input = newInput.nextInt();
-        
+
         //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input - 1, enemy.getTable().count()));
+        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(enemy.getTable().count()) - 1);
 
         return selectedEnemyCard;
     }
@@ -235,12 +211,8 @@ public class Main
             System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
         }
         
-        //Create a scanner to allow integer input for selection.
-        Scanner newInput = new Scanner(System.in);
-        int input = newInput.nextInt();
-        
         //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-        Card selectedCard = player.getTable().getCard(checkPlayerInput(input - 1, player.getTable().count()));
+        Card selectedCard = player.getTable().getCard(checkPlayerInput(player.getTable().count()) - 1);
         
         return selectedCard;
     }
@@ -249,28 +221,62 @@ public class Main
     /**
      * This method inputs the player and their card, and the enemy's card. The player
      * can choose to end their turn or continue attacking if they have the right mana.
-     * @param playerCard    
-     * @param enemyCard
-     * @param player 
+     * @param playerCard    Player's selected card.
+     * @param enemyCard     Enemy's selected card.
+     * @param player        Player reference for multiple functions.
+     * @param enemy         Enemy reference for multiple functions.
      */
-    public static void attackSequence(Card playerCard, Card enemyCard, Player player)
+    public static void attackSequence(Card playerCard, Card enemyCard, Player player, Player enemy)
     {
+        //Create input for player's decision.
+        Scanner newInput = new Scanner(System.in);
         
-
         //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
         //Since a successful attack returns true, it'll loop until you cannot attack any longer (no mana).
         while (playerCard.attack(enemyCard, player))
         {
             System.out.println("You dealt " + playerCard.getAttack() + " damage to " + enemyCard.getName());
+            System.out.println("Enemy has (" + player.getHealth() + ") HP");
+            System.out.println("You have (" + player.getManaAvailable() + ") mana available.");
             System.out.println("Select new card?");
-
-            //Yes or no?
-            if (checkConfirmation())
+            System.out.println("Or press ENTER to end turn.");
+            
+            
+            
+            while (true)
             {
-                selectCard()
-            }
+                //Clear buffer. Is required if response is valid on succesful attack.
+                newInput.reset();
+                String example = newInput.nextLine();
+                
+                if (example.equalsIgnoreCase("Yes") || example.equalsIgnoreCase("y")) //Yes to select new card and then select new enemy.
+                {
+                    playerCard = selectCard(player);
 
-            System.out.println("Select enemy card to attack.");
+                    System.out.println("Select enemy to attack.");
+                    enemyCard = selectEnemy(enemy);
+                    
+                    break;
+                } 
+                else if (example.equalsIgnoreCase("No") || example.equalsIgnoreCase("n")) //No to keep card and select new enemy.
+                {
+                    System.out.println("Select enemy to attack.");
+                    enemyCard = selectEnemy(enemy);
+                    
+                    break;
+                } 
+                else if (example.equals("")) //Pressing ENTER will end turn;
+                {
+                    return;
+                } 
+                else //Invalid response, will loop for valid answer.
+                {
+                    System.out.println("Invalid response.");
+                    
+                    //Clear buffer for new input.
+                    newInput.reset();
+                }
+            }      
         }
     }
     
@@ -286,7 +292,7 @@ public class Main
         Scanner newInput = new Scanner(System.in);
         
         //Choice 1 is to add cybernetics.
-        if (checkPlayerInput(newInput.nextInt(), 2) == 1) 
+        if (checkPlayerInput(2) == 1) 
         {   
             //Clear buffer.
             newInput.reset(); 
@@ -299,7 +305,7 @@ public class Main
             //Enter card into the card builder class.
             CardBuilder builder = new CardBuilder(selectedCard); 
         }
-        else if (checkPlayerInput(newInput.nextInt(), 2) == 2) //Choice 2 is go back.
+        else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
         {
             return false;
         }
@@ -339,12 +345,14 @@ public class Main
     /**
      * Players select certain choices via integers. If a number input is over
      * the max input it'll repeat the method.
-     * @param input         Player's input.
      * @param maxInput      Max input that can be entered and compared to first parameter.
      * @return              Returns original input if condition is true.
      */
-    public static int checkPlayerInput(int input, int maxInput)
+    public static int checkPlayerInput(int maxInput)
     {
+        Scanner newInput = new Scanner(System.in);
+        int input = newInput.nextInt();
+        
         while (true)
         {
             if (input <= maxInput)
@@ -355,13 +363,9 @@ public class Main
             {
                 System.out.println("Please enter a number equal or less than " + maxInput);
                 
-                Scanner newInput = new Scanner(System.in);
+                //Clear buffer, take in new input.
+                newInput.reset();
                 input = newInput.nextInt();
-                
-                //Netbeans states this is an unneccessary statement but it isn't.
-                //Continue statement allows loop to start again for a valid input.
-                //Recursive method takes up more memory and can be used to bloat memory.
-                continue; 
             }
         }
     }

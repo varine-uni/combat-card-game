@@ -105,6 +105,7 @@ public class Card implements Comparable<Card>
         }
         else
         {
+            System.out.println("You do not have enough mana.");
             return false;
         }
     }
