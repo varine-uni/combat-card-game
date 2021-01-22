@@ -16,8 +16,6 @@
  */
 package uk.ac.tees.cis2001.pocketbeasts;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -197,15 +195,11 @@ public class Main
      * Produces a list of the enemy's cards. Allows an input to select a card to
      * attack. The player can also choose the enemy player if wanted.
      * @param enemy     The enemy player object.
-     * @param input     Input to choose enemy card.
      * @return          Returns the chosen card.
      */
-    public static Card selectEnemy(Player enemy, Scanner input)
+    public static Card selectEnemy(Player enemy)
     {
-        //Free up buffer for next input.
-        input.reset(); 
-                    
-        System.out.println("Select an enemy card.");
+        System.out.println("Select an enemy card from their table.");
 
         //Shows enemies cards.
         for (int i = 0; i < enemy.getTable().getCards().size(); i++)
@@ -214,12 +208,13 @@ public class Main
             System.out.println((i + 1) + "." + enemy.getTable().getCards().get(i).toString());
         }
         
+        //Create a scanner to allow integer input for selection.
+        Scanner newInput = new Scanner(System.in);
+        int input = newInput.nextInt();
+        
         //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input.nextInt() - 1, enemy.getTable().count()));
-        
-        //Free up buffer for next input.
-        input.reset(); 
-        
+        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(input - 1, enemy.getTable().count()));
+
         return selectedEnemyCard;
     }
     
@@ -227,15 +222,11 @@ public class Main
      * Produces a list of the player's cards. Allows an input to select a card to
      * use (attack or action).
      * @param player    The player object.
-     * @param input     Input to choose a card.
      * @return          Returns the chosen card.
      */
-    public static Card selectCard(Player player, Scanner input)
+    public static Card selectCard(Player player)
     {
-        //Free up buffer for next input.
-        input.reset(); 
-        
-        System.out.println("Select a card from your table");
+        System.out.println("Select a card from your table.");
         
         //Shows your cards.
         for (int i = 0; i < player.getTable().getCards().size(); i++)
@@ -244,11 +235,12 @@ public class Main
             System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
         }
         
-        //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-        Card selectedCard = player.getTable().getCard(checkPlayerInput(input.nextInt() - 1, player.getTable().count()));
+        //Create a scanner to allow integer input for selection.
+        Scanner newInput = new Scanner(System.in);
+        int input = newInput.nextInt();
         
-        //Free up buffer for next input.
-        input.reset(); 
+        //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
+        Card selectedCard = player.getTable().getCard(checkPlayerInput(input - 1, player.getTable().count()));
         
         return selectedCard;
     }
@@ -275,7 +267,7 @@ public class Main
             //Yes or no?
             if (checkConfirmation())
             {
-
+                selectCard()
             }
 
             System.out.println("Select enemy card to attack.");
