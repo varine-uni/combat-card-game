@@ -73,7 +73,7 @@ public class Main
             new Class_CyberWarrior("Silverhand")
         };
 
-        //Some methods when static causes a lot of problems. Including selecting cards and fighting them.
+        //Some methods when static cause a lot of problems. Including selecting cards and fighting them.
         Main main = new Main();
         
         //Set up the intial game for the players.
@@ -143,8 +143,7 @@ public class Main
                 }
                 while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
                 
-                
-                
+                                
                 //Second stage.
                 do 
                 {
@@ -247,11 +246,8 @@ public class Main
         {
             System.out.println("You dealt " + playerCard.getAttack() + " damage to " + enemyCard.getName());
             System.out.println("Enemy has (" + player.getHealth() + ") HP");
-            System.out.println("You have (" + player.getManaAvailable() + ") mana available.");
             System.out.println("Select new card?");
             System.out.println("Or press ENTER to end turn.");
-            
-            
             
             while (true)
             {
@@ -313,7 +309,7 @@ public class Main
             
             
             //Enter card into the card builder class.
-            CardBuilder builder = new CardBuilder(selectedCard); 
+            CardBuilder builder = new CardBuilder(selectedCard);
         }
         else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
         {

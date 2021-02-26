@@ -27,10 +27,10 @@ public class Class_CyberWarrior extends Player
      */
     public final Card[] CYBERWARRIOR_CARDS = new Card[] 
     {
-        new Card("AI", "Armoured Imp", 3, 1, 5),
-        new Card("AD", "Armoured Demon", 3, 2, 5),
-        new Card("TK", "Tank", 5, 3, 7),
-        new Card("TT", "Tyrant", 10, 8, 15)
+        new Card("AI", "Armoured Imp", 3, 1, 5, 1), //3 mana, 1 attack, 5 HP, 1 cybernetic slot.
+        new Card("AD", "Armoured Demon", 3, 2, 5, 1), //3 mana, 2 attack, 5 HP, 1 cybernetic slot.
+        new Card("TK", "Tank", 5, 3, 7, 0), //5 mana, 3 attack, 7 HP, 0 cybernetic slot.
+        new Card("TT", "Tyrant", 10, 8, 15, 0) //10 mana, 8 attack, 15 HP, 0 cybernetic slot.
     }; 
     
     /**

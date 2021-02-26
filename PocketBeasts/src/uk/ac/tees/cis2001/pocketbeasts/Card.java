@@ -32,9 +32,7 @@ public class Card implements Comparable<Card>
     protected int manaCost = 0;
     protected int attack = 0;
     protected int health = 0;
-    protected int armSlots = 0;
-    protected int legSlots = 0;
-    protected int miscSlots = 0;
+    protected int cybernetics = 0; //Amount of cybernetics a card has.
     protected CardStrategy strategy;
 
     Card()
@@ -42,13 +40,14 @@ public class Card implements Comparable<Card>
         
     }
 
-    public Card(String id, String name, int manaCost, int attack, int health)
+    public Card(String id, String name, int manaCost, int attack, int health, int cybernetics)
     {
         this.id = id;
         this.name = name;
         this.manaCost = manaCost;
         this.attack = attack;
         this.health = health;
+        this.cybernetics = cybernetics;
     }
 
     public Card(Card card)
@@ -58,6 +57,7 @@ public class Card implements Comparable<Card>
         this.manaCost = card.manaCost;
         this.attack = card.attack;
         this.health = card.health;
+        this.cybernetics = card.cybernetics;
     }
 
     public String getId()
@@ -91,11 +91,14 @@ public class Card implements Comparable<Card>
      * @param enemyCard     Input the selected enemy card to deal damage to.
      * @param player        Player is inputted to access table and graveyard in the damage method.
      * @param enemy         Enemy to access enemy's table and graveyard. Because cards damage each other in one go.
+     * @return              TODO: Change this.
      */
-    public void attack(Card enemyCard, Player player, Player enemy)
+    public boolean attack(Card enemyCard, Player player, Player enemy)
     {   
         enemyCard.damage(attack, enemy);
         damage(enemyCard.getAttack(), player);
+        
+        return true;
     }
     
     /**
@@ -117,62 +120,18 @@ public class Card implements Comparable<Card>
         }
     }
     
-    public int getArmSlots()
-    {
-        return this.armSlots;
-    }
-    
-    public int getLegSlots()
-    {
-        return this.legSlots;
-    }
-    
-    public int getMiscSlots()
-    {
-        return this.miscSlots;
-    }
-    
-    public void setArmSlots(int value)
-    {
-        if (value != 0)
-        {
-           this.armSlots = value; 
-        }
-        else
-        {
-            System.out.println("Error: No slots available.");
-        }
-    }
-
-    public void setLegSlots(int value)
-    {
-        if (value != 0)
-        {
-           this.legSlots = value; 
-        }
-        else
-        {
-            System.out.println("Error: No slots available.");
-        }
-    }
-    
-    public void setMiscSlots(int value)
-    {
-        if (value != 0)
-        {
-           this.miscSlots = value; 
-        }
-        else
-        {
-            System.out.println("Error: No slots available.");
-        }
-    }
-    
+    /**
+     * Sets a strategy (action) for a card.
+     * @param strategy  Inputs an encapsulated strategy.
+     */
     public void setStrategy(CardStrategy strategy)
     {
         this.strategy = strategy;
     }
 
+    /**
+     * After being set. Use the action.
+     */
     public void useStrategy()
     {
         System.out.println(strategy.toString());

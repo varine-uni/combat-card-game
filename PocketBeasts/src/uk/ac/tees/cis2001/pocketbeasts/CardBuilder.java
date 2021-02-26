@@ -21,7 +21,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  * @author w9101532
  */
 public class CardBuilder
-{
+{   
     private Card card;
     
     CardBuilder(Card card)
@@ -29,13 +29,23 @@ public class CardBuilder
         this.card = card;
     }
     
-    public Card buildArm()
+    /**
+     * Input a card and a cybernetic. Cybernetic card will wrap the card object.
+     * @param cybernetic    Input a cybernetic card. 
+     * @return              Returns the built card object.
+     */
+    public Card addCybernetics(Cybernetics cybernetic)
     {
-        card.setArmSlots(card.getArmSlots()-1);
-        return card;
+        card = new Cybernetics(card, cybernetic);
+        
+        return build();
     }
     
-    public Card build()
+    /**
+     * Returns the card.
+     * @return  Returns the card object.
+     */
+    private Card build()
     {
         return card;
     }

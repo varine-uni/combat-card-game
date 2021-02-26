@@ -25,7 +25,7 @@ import java.util.Collections;
  * @author Steven Mead
  * @author w9101532
  * 
- * Cards to choose from.
+ * Cards to draw from to hand.
  */
 public class Deck
 {
@@ -34,26 +34,36 @@ public class Deck
 
     public final Card[] STARTER_CARDS = new Card[]
     {
-        new Card("IP", "Imp", 1, 1, 1),
-        new Card("DN", "Demon", 2, 2, 1),
-        new Card("HD", "Hellhound", 2, 2, 2),
-        new Card("ZE", "Zombie", 3, 3, 2),
-        new Card("US", "Undead Soldier", 3, 2, 3),
-        new Card("TN", "Titan", 4, 2, 10),
-        new Card("ER", "Enslaver", 4, 4, 6),
-        new Card("DL", "Dark Lord", 5, 6, 8)
+        new Card("IP", "Imp", 1, 1, 1, 0), //1 mana, 1 attack, 1 HP, 0 cybernetic slots.
+        new Card("DN", "Demon", 2, 2, 1, 0), //2 mana, 2 attack, 1 HP, 1 cybernetic slot.
+        new Card("HD", "Hellhound", 2, 2, 2, 1), //2 mana, 2 attack, 2 HP, 1 cybernetic slot.
+        new Card("ZE", "Zombie", 3, 3, 2, 0), //3 mana, 3 attack, 2 HP, 0 cybernetic slots.
+        new Card("US", "Undead Soldier", 3, 2, 3, 2), //3 mana, 2 attack, 3 HP, 2 cybernetic slots.
+        new Card("TN", "Titan", 4, 3, 10, 3), //4 mana, 3 attack, 10 HP, 3 cybernetic slots.
+        new Card("ER", "Enslaver", 5, 4, 6, 3), //5 mana, 4 attack, 6 HP, 3 cybernetic slots.
+        new Card("DL", "Dark Lord", 6, 6, 8, 4) //6 mana, 6 attack, 8 HP, 4 cybernetic slots.
     };
 
-    public ArrayList<Card> getBaseDeck()
-    {
-        return deck;
-    }
+    
     
     Deck()
     {
         addToDeck(STARTER_CARDS);
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public ArrayList<Card> getBaseDeck()
+    {
+        return deck;
+    }
+    
+    /**
+     * Add an array of cards to the players deck.
+     * @param cardArray     Input the card array.
+     */
     public void addToDeck(Card[] cardArray)
     {
         for (int i = 0; i < 2; i++)
@@ -65,6 +75,10 @@ public class Deck
         }
     }
     
+    /**
+     * Removes a card from the arraylist and returns it. (Usually for putting into hand).
+     * @return  Returns the card that the player is drawing.
+     */
     public Card draw()
     {
         Card card = this.deck.get(0);
@@ -72,6 +86,10 @@ public class Deck
         return card;
     }
 
+    /**
+     * Shuffles the deck.
+     * @param loops     How many times to loop (increase of randomness).
+     */
     public void shuffle(int loops)
     {
         for (int i = 0; i < loops; i++)
@@ -80,6 +98,10 @@ public class Deck
         }
     }
     
+    /**
+     * Counts how many cards are in the deck.
+     * @return  Returns the size of the deck.
+     */
     public int count() {
         return this.deck.size();
     }

@@ -26,29 +26,48 @@ package uk.ac.tees.cis2001.pocketbeasts;
  */
 public final class Cybernetics extends CyberDecorator 
 {
-    public boolean isLeg = false;
-    public boolean isArm = false;
-    public boolean isMisc = false;
     Strategies strats = new Strategies();
-    int stratChoice;
+    int stratChoice = 0;
     
-    public Cybernetics(Card card, int stratChoice)
+    public Cybernetics(Card card, int strategy, int attack, int hp)
     {
         super(card);
-        
-        //Choice is chosen in the client.
-        this.stratChoice = stratChoice;
+        this.health += hp;
+        this.attack += attack;
+        this.stratChoice = strategy;
+    }
+    
+    public Cybernetics(int strategy, int attack, int hp)
+    {
+        super();
+        this.health = hp;
+        this.attack = attack;
+        this.stratChoice = strategy;
+    }
+    
+    public Cybernetics(Cybernetics cybernetic)
+    {
+        this.health = cybernetic.health;
+        this.attack = cybernetic.attack;
+        this.stratChoice = cybernetic.stratChoice;
+    }
+    
+    public Cybernetics (Card card, Cybernetics cybernetic)
+    {
+        super(card);
+        this.health += cybernetic.health;
+        this.attack += cybernetic.attack;
+        this.stratChoice = cybernetic.stratChoice;
     }
     
     /**
      * Overridden card method. This method refers right back to the decorator's version
      * of this method but inputs a strategy before the decorator's version is called.
-     * @param strat     Due to the nature of this method, this parameter isn't used in this class. 
+     * @param strat     Due to the nature of this class, this parameter isn't used in this class. 
      */
     @Override
     public void setStrategy(CardStrategy strat)
     {
-        //Super here refers to the decorator.
         super.card.setStrategy(strats.selectStrategy(this.stratChoice));
     }
 }

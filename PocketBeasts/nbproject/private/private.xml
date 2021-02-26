@@ -4,17 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CardStrategy.java</file>
-            <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Deck.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Player.java</file>
+            <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CyberDeck.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Main.java</file>
-            <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Cybernetics.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Hand.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Card.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Class_CyberWarrior.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Graveyard.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CyberDecorator.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Table.java</file>
+            <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Strategies.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CardBuilder.java</file>
+            <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Action_Resurrect.java</file>
             <file>file:/C:/Users/gamer/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Class_Netrunner.java</file>
         </group>
     </open-files>

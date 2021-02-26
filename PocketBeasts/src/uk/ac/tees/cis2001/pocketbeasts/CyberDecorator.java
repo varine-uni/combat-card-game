@@ -28,15 +28,29 @@ public abstract class CyberDecorator extends Card
 
     public CyberDecorator(Card card)
     {
+        super(card);
         this.card = card;
     }
     
+    public CyberDecorator()
+    {
+        
+    }
+    
+    /**
+     * Gets the attack damage of the card plus the wrappers.
+     * @return  Returns an integer of the added attack damage.
+     */
     @Override
     public int getAttack()
     {
         return card.getAttack() + this.attack;
     }
     
+    /**
+     * Gets the health of the card plus the wrappers.
+     * @return  Returns an integer of the added health.
+     */
     @Override
     public int getHealth()
     {

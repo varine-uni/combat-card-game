@@ -25,10 +25,41 @@ import java.util.ArrayList;
  */
 public class CyberDeck
 {
-    ArrayList<Cybernetics> cyberneticsCards = new ArrayList<>();
+    ArrayList<Cybernetics> cyberneticCards = new ArrayList<>();
+    
+    private final Cybernetics[] CYBERNETIC_CARDS = new Cybernetics[]
+    {
+        //Test cybernetics. TODO: Change this up, add names.
+        new Cybernetics(1, 2, 2),
+        new Cybernetics(2, 1, 1),
+        new Cybernetics(1, 5, 5)
+    };
     
     CyberDeck()
     {
-        
+        addToDeck(CYBERNETIC_CARDS);
+    }
+    
+    /**
+     * Add an array of cards to the players cyberdeck.
+     * @param cardArray     Input the card array.
+     */
+    private void addToDeck(Cybernetics[] cardArray)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            for (Cybernetics cybernetics : cardArray)
+            {
+                cyberneticCards.add(new Cybernetics(cybernetics));
+            }
+        }
+    }
+    
+    /**
+     * Counts how many cards are in the cyberdeck.
+     * @return      Returns the size of the cyberdeck.
+     */
+    public int count() {
+        return this.cyberneticCards.size();
     }
 }

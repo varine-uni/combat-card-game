@@ -37,7 +37,8 @@ public class Player
 
     protected final Deck deck;
     protected final Hand hand;
-    protected final Table table = new Table();
+    protected final Table table;
+    protected final CyberDeck cyberdeck;
     protected final Graveyard graveyard;
 
     public Player(String name)
@@ -48,9 +49,14 @@ public class Player
         this.health = 15;
         this.deck = new Deck();
         this.hand = new Hand();
+        this.table = new Table();
+        this.cyberdeck = new CyberDeck();
         this.graveyard = new Graveyard();
     }
     
+    /**
+     * Sets up the table and hand for the initial state of the players.
+     */
     public void newGame()
     {
         //Will take the first 2 "weak" cards and place them on the table.
@@ -62,13 +68,17 @@ public class Player
         //From now on, the cards taken from deck are random.
         this.deck.shuffle(5); 
         
-        //Takes two random cards in hand.
+        //Takes two random cards to hand.
         for (int i = 0; i < 2; i++) 
         {
             this.hand.add(this.deck.draw());
         }
     }
 
+    /**
+     * Gets the player's name.
+     * @return  Returns the name as a string.
+     */
     public String getName()
     {
         return this.name;
@@ -92,6 +102,10 @@ public class Player
         }
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getManaAvailable()
     {
         return this.manaAvailable;
@@ -154,13 +168,13 @@ public class Player
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-9s HEALTH(%d) MANA(%d)\n", this.name, this.health, this.manaAvailable));
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             sb.append("+-------+ ");
         }
         sb.append("\n");
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             sb.append("|       | ");
         }
@@ -169,22 +183,24 @@ public class Player
 
         sb.append("| DECK  | ");
         sb.append("| GRAVE | ");
+        sb.append("| CYBER | ");
 
         sb.append("\n");
 
         sb.append(String.format("| %-6d| ", this.deck.count()));
         sb.append(String.format("| %-6d| ", this.graveyard.count()));
+        sb.append(String.format("| %-6d| ", this.cyberdeck.count()));
 
         sb.append("\n");
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             sb.append("|       | ");
         }
 
         sb.append("\n");
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             sb.append("+-------+ ");
         }
