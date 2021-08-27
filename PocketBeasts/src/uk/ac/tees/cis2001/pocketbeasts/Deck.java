@@ -31,7 +31,7 @@ public class Deck extends CardCollection
 {
     public final Card[] STARTER_CARDS = new Card[]
     {
-        new PlayerCard("IP", "Imp", 0, 6, 1), //1 mana, 1 attack, 1 HP.
+        new PlayerCard("IP", "Imp", 1, 1, 1), //1 mana, 1 attack, 1 HP.
         new PlayerCard("DN", "Demon", 2, 2, 1), //2 mana, 2 attack, 1 HP.
         new PlayerCard("HD", "Hellhound", 2, 2, 2), //2 mana, 2 attack, 2 HP.
         new PlayerCard("ZE", "Zombie", 3, 3, 2), //3 mana, 3 attack, 2 HP.

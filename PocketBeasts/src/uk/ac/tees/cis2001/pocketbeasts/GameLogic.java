@@ -87,7 +87,7 @@ public class GameLogic
             System.out.println("3.Use hand.");
             System.out.println("4.End turn.");
             
-            switch (checkPlayerInput(3))
+            switch (checkPlayerInput(4))
             {
                 case 1:
                     attackSequencePlayer(player, enemy); //Attack player.
@@ -248,24 +248,21 @@ public class GameLogic
                     System.out.println((i + 1) + "." + player.getHand().getCards().get(i).toString());
                 }
                 
-                int choice = checkPlayerInput(player.getHand().count() - 1);
-                Card c = player.getHand().getCard(choice);
+                int choice = checkPlayerInput(player.getHand().count());
+                Card c = player.getHand().getCard(choice - 1);
                 c = new Cybernetic(c);
-                player.replaceInHand(c, choice);
-                
-                //Shows player's hand.
-                for (int i = 0; i < player.getHand().getCards().size(); i++)
-                {
-                    //The (i+1)+"." is just indexing each card in the loop starting from 2 (since 1. is taken by the enemy player).
-                    System.out.println((i + 1) + "." + player.getHand().getCards().get(i).toString());
-                }
+                player.replaceInHand(c, choice - 1);
                 
                 return true;
                 
             } 
-            else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
+            else
             {
-                return false;
+                System.out.println("Are you sure?");
+                if (checkConfirmation())
+                {
+                    return false;
+                }
             }
         }
     }

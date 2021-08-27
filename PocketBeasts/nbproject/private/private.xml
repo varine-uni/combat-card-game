@@ -4,11 +4,22 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/GameLogic.java</file>
-            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Card.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Class_CyberWarrior.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Graveyard.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/WarriorStateStrategy.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Hand.java</file>
             <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Player.java</file>
-            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Cybernetics.java</file>
-            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Upgradeable.java</file>
-            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CardStrategyInterface.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CardCollection.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/NormalState.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Cybernetic.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/WarSubject.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/BerserkAbility.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/CyberneticDecorator.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/BerserkState.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Main.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Class_Netrunner.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/WarObserver.java</file>
+            <file>file:/C:/Users/Dragonvarine/Documents/GitHub/university_card_game/PocketBeasts/src/uk/ac/tees/cis2001/pocketbeasts/Table.java</file>
         </group>
     </open-files>
 </project-private>
