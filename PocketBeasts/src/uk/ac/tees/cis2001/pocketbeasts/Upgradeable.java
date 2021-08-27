@@ -17,36 +17,14 @@
 package uk.ac.tees.cis2001.pocketbeasts;
 
 /**
- *
  * @author w9101532
+ * 
+ * This interface sets up the decorator.
+ * Methods define what's upgradable.
  */
-public class CardBuilder
-{   
-    private Card card;
+public interface Upgradeable
+{
+    public int getAttack();
     
-    CardBuilder(Card card)
-    {
-        this.card = card;
-    }
-    
-    /**
-     * Input a card and a cybernetic. Cybernetic card will wrap the card object.
-     * @param cybernetic    Input a cybernetic card. 
-     * @return              Returns the built card object.
-     */
-    public Card addCybernetics(Cybernetics cybernetic)
-    {
-        card = new Cybernetics(card, cybernetic);
-        
-        return build();
-    }
-    
-    /**
-     * Returns the card.
-     * @return  Returns the card object.
-     */
-    private Card build()
-    {
-        return card;
-    }
+    public int getHealth();
 }

@@ -26,23 +26,10 @@ import java.util.ArrayList;
  * 
  * Cards that die go here.
  */
-public class Graveyard
+public class Graveyard extends CardCollection
 {
-    
-    private final ArrayList<Card> cards;
-
     public Graveyard() 
     {
-        this.cards = new ArrayList<>();
-    }
-    
-    public void add(Card card) 
-    {
-        this.cards.add(card);
-    }
-    
-    public int count() 
-    {
-        return this.cards.size();
+        super();
     }
 }

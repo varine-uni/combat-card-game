@@ -20,13 +20,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Action_Resurrect implements CardStrategy
-{   
-    @Override
-    public String action()
-    {
-        System.out.println("Resurrect");
-        return "Action performed";
-    }
-    
+public interface CardStrategyInterface
+{
+    public int useStrategy();
 }

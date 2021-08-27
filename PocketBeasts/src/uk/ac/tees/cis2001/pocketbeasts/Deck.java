@@ -27,11 +27,8 @@ import java.util.Collections;
  * 
  * Cards to draw from to hand.
  */
-public class Deck
+public class Deck extends CardCollection
 {
-
-    private final ArrayList<Card> deck = new ArrayList<>();
-
     public final Card[] STARTER_CARDS = new Card[]
     {
         new Card("IP", "Imp", 1, 1, 1, 0), //1 mana, 1 attack, 1 HP, 0 cybernetic slots.
@@ -40,7 +37,7 @@ public class Deck
         new Card("ZE", "Zombie", 3, 3, 2, 0), //3 mana, 3 attack, 2 HP, 0 cybernetic slots.
         new Card("US", "Undead Soldier", 3, 2, 3, 2), //3 mana, 2 attack, 3 HP, 2 cybernetic slots.
         new Card("TN", "Titan", 4, 3, 10, 3), //4 mana, 3 attack, 10 HP, 3 cybernetic slots.
-        new Card("ER", "Enslaver", 5, 4, 6, 3), //5 mana, 4 attack, 6 HP, 3 cybernetic slots.
+        new Card("CC", "Caco", 5, 4, 6, 3), //5 mana, 4 attack, 6 HP, 3 cybernetic slots.
         new Card("DL", "Dark Lord", 6, 6, 8, 4) //6 mana, 6 attack, 8 HP, 4 cybernetic slots.
     };
 
@@ -48,16 +45,17 @@ public class Deck
     
     Deck()
     {
+        super();
         addToDeck(STARTER_CARDS);
     }
     
     /**
-     * 
-     * @return 
+     * Gets the base deck.
+     * @return  Returns the base deck.
      */
     public ArrayList<Card> getBaseDeck()
     {
-        return deck;
+        return super.getCards();
     }
     
     /**
@@ -70,7 +68,7 @@ public class Deck
         {
             for (Card card : cardArray)
             {
-                deck.add(new Card(card));
+                super.add(new Card(card));
             }
         }
     }
@@ -81,8 +79,8 @@ public class Deck
      */
     public Card draw()
     {
-        Card card = this.deck.get(0);
-        this.deck.remove(0);
+        Card card = super.getCards().get(0);
+        super.getCards().remove(0);
         return card;
     }
 
@@ -94,15 +92,7 @@ public class Deck
     {
         for (int i = 0; i < loops; i++)
         {
-            Collections.shuffle(this.deck);
+            Collections.shuffle(super.getCards());
         }
-    }
-    
-    /**
-     * Counts how many cards are in the deck.
-     * @return  Returns the size of the deck.
-     */
-    public int count() {
-        return this.deck.size();
     }
 }

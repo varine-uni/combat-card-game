@@ -24,7 +24,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * Card object class. All cards are based on this object.
  */
-public class Card implements Comparable<Card>
+public class Card implements Comparable<Card>, Upgradeable
 {
 
     protected String id = "";
@@ -32,8 +32,7 @@ public class Card implements Comparable<Card>
     protected int manaCost = 0;
     protected int attack = 0;
     protected int health = 0;
-    protected int cybernetics = 0; //Amount of cybernetics a card has.
-    protected CardStrategy strategy;
+    protected int cybernetics = 0; //Amount of cybernetic slots a card has.
 
     Card()
     {
@@ -75,66 +74,91 @@ public class Card implements Comparable<Card>
         return this.manaCost;
     }
 
+    /**
+     * Gets the card's current attack value.
+     * @return  Returns the attack value.
+     */
+    @Override
     public int getAttack()
     {
-        return this.attack;
+        return attack;
     }
 
+    /**
+     * Gets the card's current health value.
+     * @return  Returns the health value.
+     */
+    @Override
     public int getHealth()
     {
-        return this.health;
+        return health;
     }
 
     /**
      * Attack function for all cards. Dealing out damage will damage
-     * the player's card.
+     * the player's card. Deducts mana.
      * @param enemyCard     Input the selected enemy card to deal damage to.
-     * @param player        Player is inputted to access table and graveyard in the damage method.
+     * @param player        Player is inputted to access table and graveyard in the damage method. Logic for mana is used also.
      * @param enemy         Enemy to access enemy's table and graveyard. Because cards damage each other in one go.
-     * @return              TODO: Change this.
+     * @return              Returns true when the player wasn't out of mana when the attack begun. 
      */
     public boolean attack(Card enemyCard, Player player, Player enemy)
     {   
-        enemyCard.damage(attack, enemy);
-        damage(enemyCard.getAttack(), player);
+        if (player.getManaAvailable() >= this.manaCost)
+        {
+            /**
+             * Death check. In the damage method, it returns true if the damage
+             * take was fatal. This is where it's used.
+             */
+            if (enemyCard.damage(getAttack()) == true)
+            {
+                enemyCard.death(enemy);
+            }
+            if (damage(enemyCard.getAttack()) == true)
+            {
+                this.death(player);
+            }
+            
+            //Use up player's mana.
+            player.useMana(this.manaCost);
+            
+            return true;
+        }
+        else
+        {
+            System.out.println(player.getName() + " doesn't have enough mana. (" 
+                    + player.getManaAvailable() + ")");
+            return false;
+        }
         
-        return true;
     }
     
     /**
      * Deducts from available HP.
      * @param amount    Damage dealt.
-     * @param player    Player to access table and graveyard.    
+     * @return          Returns true if card dies. False otherwise.
      */
-    public void damage(int amount, Player player)
+    public boolean damage(int amount)
     {
         this.health -= amount;
-        
+
         if (health <= 0)
         {
             //Health wont appear in negatives on death.
             health = 0;
-            
-            player.graveyard.add(this);
-            player.table.remove(this);
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
-    
-    /**
-     * Sets a strategy (action) for a card.
-     * @param strategy  Inputs an encapsulated strategy.
-     */
-    public void setStrategy(CardStrategy strategy)
-    {
-        this.strategy = strategy;
-    }
 
-    /**
-     * After being set. Use the action.
-     */
-    public void useStrategy()
+    private void death(Player player)
     {
-        System.out.println(strategy.toString());
+        player.graveyard.add(this);
+        player.table.remove(this);
     }
 
     /**
@@ -144,8 +168,8 @@ public class Card implements Comparable<Card>
     @Override
     public String toString()
     {
-        return this.name + " (" + this.id + ") Mana Cost(" + this.manaCost + ")"
-                + " Attack(" + this.attack + ") Health(" + this.health + ")\n";
+        return this.name + " (" + this.id + ") Mana Cost(" + getManaCost() + ")"
+                + " Attack(" + getAttack() + ") Health(" + getHealth() + ")\n";
     }
 
     @Override

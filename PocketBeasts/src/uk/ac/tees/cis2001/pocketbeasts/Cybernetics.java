@@ -19,55 +19,31 @@ package uk.ac.tees.cis2001.pocketbeasts;
 /**
  *
  * @author w9101532
- * 
- * Cybernetics class extends the decorator as a cybernetic object can "wrap" a
- * card object. This is possible if a card can ask for a cybernetic arm,
- * leg, or misc.
  */
-public final class Cybernetics extends CyberDecorator 
+public class Cybernetics extends CyberneticsDecorator
 {
-    Strategies strats = new Strategies();
-    int stratChoice = 0;
+    private int healthUpgrade;
+    private int attackUpgrade;
     
-    public Cybernetics(Card card, int strategy, int attack, int hp)
+    public Cybernetics(Upgradeable upgrade)
     {
-        super(card);
-        this.health += hp;
-        this.attack += attack;
-        this.stratChoice = strategy;
+        super(upgrade);
     }
     
-    public Cybernetics(int strategy, int attack, int hp)
+    public Cybernetics(Upgradeable upgrade, int health, int attack)
     {
-        super();
-        this.health = hp;
-        this.attack = attack;
-        this.stratChoice = strategy;
+        super(upgrade);
     }
     
-    public Cybernetics(Cybernetics cybernetic)
-    {
-        this.health = cybernetic.health;
-        this.attack = cybernetic.attack;
-        this.stratChoice = cybernetic.stratChoice;
-    }
-    
-    public Cybernetics (Card card, Cybernetics cybernetic)
-    {
-        super(card);
-        this.health += cybernetic.health;
-        this.attack += cybernetic.attack;
-        this.stratChoice = cybernetic.stratChoice;
-    }
-    
-    /**
-     * Overridden card method. This method refers right back to the decorator's version
-     * of this method but inputs a strategy before the decorator's version is called.
-     * @param strat     Due to the nature of this class, this parameter isn't used in this class. 
-     */
     @Override
-    public void setStrategy(CardStrategy strat)
+    public int getAttack()
     {
-        super.card.setStrategy(strats.selectStrategy(this.stratChoice));
+        return super.getAttack() + 10;
+    }
+    
+    @Override
+    public int getHealth()
+    {
+        return super.getHealth() + 10;
     }
 }

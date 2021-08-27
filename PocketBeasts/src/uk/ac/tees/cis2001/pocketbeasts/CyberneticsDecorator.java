@@ -17,33 +17,28 @@
 package uk.ac.tees.cis2001.pocketbeasts;
 
 /**
- * This contains all the strategies that can be used by a card.
- * It's encapsulated in a class to allow easier output using conditionals.
+ *
  * @author w9101532
  */
-public class Strategies
+public abstract class CyberneticsDecorator implements Upgradeable
 {
-    CardStrategy strategy = null;
-    Action_Resurrect resurrect = new Action_Resurrect();
-    Action_InstaKill instaKill = new Action_InstaKill();
+    protected Upgradeable upgradeableCard;
     
-    public CardStrategy selectStrategy(int input)
+    CyberneticsDecorator(Upgradeable upgrade)
     {
-        switch (input)
-        {
-            case 1:
-                strategy = resurrect;
-                break;
-
-            case 2:
-                strategy = instaKill;
-                break;
-                
-            default:
-                strategy = null;
-                break;
-        }
-        
-        return strategy;
+        this.upgradeableCard = upgrade;
     }
+    
+    @Override
+    public int getAttack()
+    {
+        return upgradeableCard.getAttack();
+    }
+
+    @Override
+    public int getHealth()
+    {
+        return upgradeableCard.getHealth();
+    }
+
 }

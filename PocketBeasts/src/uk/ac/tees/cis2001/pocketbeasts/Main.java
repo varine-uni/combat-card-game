@@ -47,7 +47,7 @@ public class Main
         System.out.println("H  = Health:                 |A     H| ");
         System.out.println("                             +-------+ ");
         System.out.println("");
-        System.out.println("New players each start with 15 Health and 3 Mana to spend on playing cards.");
+        System.out.println("New players each start with 15 Health and 1 Mana to spend on playing cards.");
         System.out.println("At the start of the game each player draws 5 cards from their deck to hand.");
         System.out.println("Two of those cards are automatically placed on the table.");
         System.out.println("");
@@ -73,29 +73,22 @@ public class Main
             new Class_CyberWarrior("Silverhand")
         };
 
-        //Some methods when static cause a lot of problems. Including selecting cards and fighting them.
-        Main main = new Main();
+        //Sets up the game for the players.
+        newGame(players);
         
-        //Set up the intial game for the players.
-        main.newGame(players);
-
+        //An instance of the object that contains methods and logic used for the game.
+        GameLogic gameLogic = new GameLogic();
+        
+        int index = 0; //Index alternates each loop
         Boolean run = true;
         while (run)
         {
             for (Player player : players)
             {
-                //Index counter for knowing the second player's variable.
-                int index = 0; 
-                
-                //Counter alternates between 1 and 0 for the player's array.
-                if (index == 1) 
-                {
-                    index = 0;
-                } 
+                if (index == 0)
+                    index++;
                 else
-                {
-                    index = 1;
-                }
+                    index--;
 
                 //Enemy player variable.
                 Player enemy = players[index];
@@ -114,17 +107,17 @@ public class Main
                 {
                     while (true)
                     {
-                        System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index.");
+                        System.out.println(player.getName() + ", Choose an option\nSelect by typing in the index number.");
                         System.out.println("1. Play turn\n2. Access card builder");
                         
                         //Max input is two as there are only two available options. Returns original input.
-                        switch (main.checkPlayerInput(2)) 
+                        switch (gameLogic.checkPlayerInput(2)) 
                         {
                             case 1:
                                 break;
 
                             case 2:
-                                if (main.cardBuilder(player) == false) //If player decides to quit the card builder: repeat options.
+                                if (gameLogic.cardBuilderInterface(player) == false) //If player decides to quit the card builder: repeat options.
                                 {
                                     continue;
                                 }
@@ -132,7 +125,6 @@ public class Main
                                 {
                                     break;
                                 }
-                                    
                             default:
                                 System.out.println("Going back2.");
                                 continue;       
@@ -141,7 +133,8 @@ public class Main
                     }   
                     System.out.println("Are you sure?");
                 }
-                while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
+                //TODO: Remove this condition so it doesnt ask if the user is sure.
+                while (!gameLogic.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise upper code continues to loop.
                 
                                 
                 //Second stage.
@@ -149,17 +142,13 @@ public class Main
                 {
                     System.out.println("Player: " + player.getName() + "'s turn\n");
                     System.out.println(enemy);
+        
+                    gameLogic.menu(player, enemy);
                     
-                    main.attackSequence(main.selectCard(player), main.selectEnemy(enemy), player, enemy);
-                    
-                    System.out.println("Are you sure?");
+                    System.out.println("End turn?");
                 } 
-                while (!main.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
-
-                if (!run)
-                {
-                    break;
-                }
+                while (!gameLogic.checkConfirmation()); //Check if confirmationInput says yes or no, otherwise method continues to loop.
+                
 
                 //Print final play state
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -172,207 +161,11 @@ public class Main
      * Gets the array of players, sets up a new game for them.
      * @param playerArray   The player array.
      */
-    private void newGame(Player[] playerArray)
+    private static void newGame(Player[] playerArray)
     {
         for (Player players : playerArray)
         {
             players.newGame();
-        }
-    }
-    
-    /**
-     * Produces a list of the enemy's cards. Allows an input to select a card to
-     * attack. The player can also choose the enemy player if wanted.
-     * @param enemy     The enemy player object.
-     * @return          Returns the chosen card.
-     */
-    private Card selectEnemy(Player enemy)
-    {
-        System.out.println("Select an enemy card from their table.");
-
-        //Shows enemies cards.
-        for (int i = 0; i < enemy.getTable().getCards().size(); i++)
-        {
-            //The (i+1)+"." is just indexing each card in the loop starting from 1.
-            System.out.println((i + 1) + "." + enemy.getTable().getCards().get(i).toString());
-        }
-
-        //Gets a reference to card on enemy's table. -1 is to convert natural number index to integer index.
-        Card selectedEnemyCard = enemy.getTable().getCard(checkPlayerInput(enemy.getTable().count()) - 1);
-
-        return selectedEnemyCard;
-    }
-    
-    /**
-     * Produces a list of the player's cards. Allows an input to select a card to
-     * use (attack or action).
-     * @param player    The player object.
-     * @return          Returns the chosen card.
-     */
-    private Card selectCard(Player player)
-    {
-        System.out.println("Select a card from your table.");
-        
-        //Shows your cards.
-        for (int i = 0; i < player.getTable().getCards().size(); i++)
-        {
-            //The (i+1)+"." is just indexing each card in the loop starting from 1.
-            System.out.println((i + 1) + "." + player.getTable().getCards().get(i).toString());
-        }
-        
-        //Gets a reference to card on your table. -1 is to convert natural number index to integer index.
-        Card selectedCard = player.getTable().getCard(checkPlayerInput(player.getTable().count()) - 1);
-        
-        return selectedCard;
-    }
-    
-    
-    /**
-     * This method inputs the player and their card, and the enemy's card. The player
-     * can choose to end their turn or continue attacking.
-     * @param playerCard    Player's selected card.
-     * @param enemyCard     Enemy's selected card.
-     * @param player        Player reference for multiple functions.
-     * @param enemy         Enemy reference for multiple functions.
-     */
-    private void attackSequence(Card playerCard, Card enemyCard, Player player, Player enemy)
-    {
-        //Create input for player's decision.
-        Scanner newInput = new Scanner(System.in);
-        
-        //Using the player's selected card, and selected enemy card. Attack. Will deduct mana from player.
-        //Since a successful attack returns true, it'll loop until you cannot attack any longer (no mana).
-        while (playerCard.attack(enemyCard, player, enemy))
-        {
-            System.out.println("You dealt " + playerCard.getAttack() + " damage to " + enemyCard.getName());
-            System.out.println("Enemy has (" + player.getHealth() + ") HP");
-            System.out.println("Select new card?");
-            System.out.println("Or press ENTER to end turn.");
-            
-            while (true)
-            {
-                //Clear buffer. Is required if response is valid on succesful attack.
-                newInput.reset();
-                String example = newInput.nextLine();
-                
-                if (example.equalsIgnoreCase("Yes") || example.equalsIgnoreCase("y")) //Yes to select new card and then select new enemy.
-                {
-                    playerCard = selectCard(player);
-
-                    System.out.println("Select enemy to attack.");
-                    enemyCard = selectEnemy(enemy);
-                    
-                    break;
-                } 
-                else if (example.equalsIgnoreCase("No") || example.equalsIgnoreCase("n")) //No to keep card and select new enemy.
-                {
-                    System.out.println("Select enemy to attack.");
-                    enemyCard = selectEnemy(enemy);
-                    
-                    break;
-                } 
-                else if (example.equals("")) //Pressing ENTER will end turn;
-                {
-                    return;
-                } 
-                else //Invalid response, will loop for valid answer.
-                {
-                    System.out.println("Invalid response.");
-                    
-                    //Clear buffer for new input.
-                    newInput.reset();
-                }
-            }      
-        }
-    }
-    
-    /**
-     * Add cybernetics to player's cards.
-     * @param player    Player whose cards will be modified.
-     * @return          Returns false if exit. Returns true to continue rest of code.
-     */
-    private boolean cardBuilder(Player player)
-    {
-        System.out.println("Choose from the following options.");
-        System.out.println("1. Add cybernetics\n2. Exit");
-        Scanner newInput = new Scanner(System.in);
-        
-        //Choice 1 is to add cybernetics.
-        if (checkPlayerInput(2) == 1) 
-        {   
-            //Clear buffer.
-            newInput.reset(); 
-            
-            //Select card from hand.
-            //You can only upgrade cards that are in your hand.
-            Card selectedCard = player.getHand().getCards().get(newInput.nextInt()); 
-            
-            
-            //Enter card into the card builder class.
-            CardBuilder builder = new CardBuilder(selectedCard);
-        }
-        else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
-        {
-            return false;
-        }
-        
-        return true;
-    }
-    
-    /**
-     * Method checks input for yes or no string. If anything else, will
-     * repeat itself till an appropriate response is put in.
-     * @return          Returns true or false (yes and no respectively).
-     */
-    private boolean checkConfirmation()
-    {
-        Scanner newInput = new Scanner(System.in);
-        String input = newInput.nextLine();
-        
-        while (true)
-        {
-            if (input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("y"))
-            {
-                return true;
-            }
-            else if (input.equalsIgnoreCase("No") || input.equalsIgnoreCase("n"))
-            {
-                return false;
-            } 
-            else
-            {
-                System.out.println("Please enter an appropriate input. (Y/Yes or N/No)");
-                newInput.reset();
-                input = newInput.nextLine();
-            }
-        }  
-    }
-    
-    /**
-     * Players select certain choices via integers. If a number input is over
-     * the max input it'll repeat the method.
-     * @param maxInput      Max input that can be entered and compared to first parameter.
-     * @return              Returns original input if condition is true.
-     */
-    private int checkPlayerInput(int maxInput)
-    {
-        Scanner newInput = new Scanner(System.in);
-        int input = newInput.nextInt();
-        
-        while (true)
-        {
-            if (input <= maxInput)
-            {
-                return input;
-            }
-            else
-            {
-                System.out.println("Please enter a number equal or less than " + maxInput);
-                
-                //Clear buffer, take in new input.
-                newInput.reset();
-                input = newInput.nextInt();
-            }
         }
     }
 }

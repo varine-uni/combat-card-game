@@ -26,88 +26,11 @@ import java.util.ArrayList;
  * 
  * Cards placed on "table".
  */
-public class Table
+public class Table extends CardCollection
 { 
-
-    private final ArrayList<Card> cards;
-
     public Table()
     {
-        this.cards = new ArrayList<>();
-    }
-
-    public ArrayList<Card> getCards()
-    {
-        return cards;
-    }
-
-    public Card getCard(int index)
-    {
-        return cards.get(index);
-    }
-
-    public void add(Card card)
-    {
-        this.cards.add(card);
-    }
-
-    public void remove(Card card)
-    {
-        this.cards.remove(card);
-    }
-
-    public void removeAll(ArrayList<Card> cards)
-    {
-        this.cards.removeAll(cards);
-    }
-
-    public int count()
-    {
-        return this.cards.size();
+        super();
     }
     
-    @Override
-    public String toString()
-    {
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < this.count(); i++)
-        {
-            sb.append("+-------+ ");
-        }
-        sb.append("\n");
-
-        for (Card card : this.cards)
-        {
-            sb.append(String.format("|%7d| ", card.getManaCost()));
-        }
-        sb.append("\n");
-
-        for (Card card : this.cards)
-        {
-            sb.append(String.format("|  %-5s| ", card.getId()));
-        }
-        sb.append("\n");
-
-        for (int i = 0; i < this.count(); i++)
-        {
-            sb.append("|       | ");
-        }
-        sb.append("\n");
-
-        for (Card card : this.cards)
-        {
-            sb.append(String.format("|%-2d %4d| ", card.getAttack(), card.getHealth()));
-        }
-        sb.append("\n");
-
-        for (int i = 0; i < this.count(); i++)
-        {
-            sb.append("+-------+ ");
-        }
-        sb.append("\n");
-
-        return sb.toString();
-    }
 }
