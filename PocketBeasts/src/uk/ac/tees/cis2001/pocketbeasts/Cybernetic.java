@@ -20,25 +20,18 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public abstract class CyberneticsDecorator implements Upgradeable
+public class Cybernetic extends CyberneticDecorator
 {
-    protected Upgradeable upgradeableCard;
     
-    CyberneticsDecorator(Upgradeable upgrade)
+    public Cybernetic(Card card)
     {
-        this.upgradeableCard = upgrade;
+        super(card);
+        
+        attack = 10;
+        health = 10;
+        id = "+";
+        name = "";
+        manaCost = 1;
     }
     
-    @Override
-    public int getAttack()
-    {
-        return upgradeableCard.getAttack();
-    }
-
-    @Override
-    public int getHealth()
-    {
-        return upgradeableCard.getHealth();
-    }
-
 }

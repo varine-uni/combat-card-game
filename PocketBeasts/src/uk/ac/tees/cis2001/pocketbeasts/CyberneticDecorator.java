@@ -20,7 +20,41 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public interface CardStrategyInterface
+public abstract class CyberneticDecorator extends Card
 {
-    public int useStrategy();
+    protected Card card;
+    
+    public CyberneticDecorator(Card card)
+    {
+        this.card = card;
+    }
+    
+    @Override
+    public int getHealth()
+    {
+        return card.getHealth() + health;
+    }
+    
+    @Override
+    public int getAttack()
+    {
+        return card.getAttack() + attack;
+    }
+    
+    @Override
+    public String getName()
+    {
+        return card.getName() + name;
+    }
+    
+    public String getID()
+    {
+        return card.getId() + id;
+    }
+    
+    @Override
+    public int getManaCost()
+    {
+        return card.getManaCost() + manaCost;
+    }
 }

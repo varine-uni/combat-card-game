@@ -185,7 +185,16 @@ public class Player
     {
         this.hand.add(this.deck.draw());
     }
-
+    
+    /**
+     * Places chosen card onto the table.
+     * @param card  Selected card.
+     */
+    public void placeCard(Card card)
+    {
+        this.table.add(card);
+    }
+    
     /**
      * Player's damage function (taken). Player can take damage themselves and will
      * die if damage was fatal.

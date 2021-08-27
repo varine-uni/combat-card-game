@@ -24,7 +24,7 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * Card object class. All cards are based on this object.
  */
-public class Card implements Comparable<Card>, Upgradeable
+public abstract class Card implements Comparable<Card>
 {
 
     protected String id = "";
@@ -32,21 +32,19 @@ public class Card implements Comparable<Card>, Upgradeable
     protected int manaCost = 0;
     protected int attack = 0;
     protected int health = 0;
-    protected int cybernetics = 0; //Amount of cybernetic slots a card has.
 
     Card()
     {
         
     }
 
-    public Card(String id, String name, int manaCost, int attack, int health, int cybernetics)
+    public Card(String id, String name, int manaCost, int attack, int health)
     {
         this.id = id;
         this.name = name;
         this.manaCost = manaCost;
         this.attack = attack;
         this.health = health;
-        this.cybernetics = cybernetics;
     }
 
     public Card(Card card)
@@ -56,29 +54,27 @@ public class Card implements Comparable<Card>, Upgradeable
         this.manaCost = card.manaCost;
         this.attack = card.attack;
         this.health = card.health;
-        this.cybernetics = card.cybernetics;
     }
 
     public String getId()
     {
-        return this.id;
+        return id;
     }
 
     public String getName()
     {
-        return this.name;
+        return name;
     }
 
     public int getManaCost()
     {
-        return this.manaCost;
+        return manaCost;
     }
 
     /**
      * Gets the card's current attack value.
      * @return  Returns the attack value.
      */
-    @Override
     public int getAttack()
     {
         return attack;
@@ -88,7 +84,6 @@ public class Card implements Comparable<Card>, Upgradeable
      * Gets the card's current health value.
      * @return  Returns the health value.
      */
-    @Override
     public int getHealth()
     {
         return health;
@@ -168,7 +163,7 @@ public class Card implements Comparable<Card>, Upgradeable
     @Override
     public String toString()
     {
-        return this.name + " (" + this.id + ") Mana Cost(" + getManaCost() + ")"
+        return getName() + " (" + getId() + ") Mana Cost(" + getManaCost() + ")"
                 + " Attack(" + getAttack() + ") Health(" + getHealth() + ")\n";
     }
 

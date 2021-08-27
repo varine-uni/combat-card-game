@@ -31,14 +31,14 @@ public class Deck extends CardCollection
 {
     public final Card[] STARTER_CARDS = new Card[]
     {
-        new Card("IP", "Imp", 1, 1, 1, 0), //1 mana, 1 attack, 1 HP, 0 cybernetic slots.
-        new Card("DN", "Demon", 2, 2, 1, 0), //2 mana, 2 attack, 1 HP, 1 cybernetic slot.
-        new Card("HD", "Hellhound", 2, 2, 2, 1), //2 mana, 2 attack, 2 HP, 1 cybernetic slot.
-        new Card("ZE", "Zombie", 3, 3, 2, 0), //3 mana, 3 attack, 2 HP, 0 cybernetic slots.
-        new Card("US", "Undead Soldier", 3, 2, 3, 2), //3 mana, 2 attack, 3 HP, 2 cybernetic slots.
-        new Card("TN", "Titan", 4, 3, 10, 3), //4 mana, 3 attack, 10 HP, 3 cybernetic slots.
-        new Card("CC", "Caco", 5, 4, 6, 3), //5 mana, 4 attack, 6 HP, 3 cybernetic slots.
-        new Card("DL", "Dark Lord", 6, 6, 8, 4) //6 mana, 6 attack, 8 HP, 4 cybernetic slots.
+        new PlayerCard("IP", "Imp", 1, 1, 1), //1 mana, 1 attack, 1 HP.
+        new PlayerCard("DN", "Demon", 2, 2, 1), //2 mana, 2 attack, 1 HP.
+        new PlayerCard("HD", "Hellhound", 2, 2, 2), //2 mana, 2 attack, 2 HP.
+        new PlayerCard("ZE", "Zombie", 3, 3, 2), //3 mana, 3 attack, 2 HP.
+        new PlayerCard("US", "Undead Soldier", 3, 2, 3), //3 mana, 2 attack, 3 HP.
+        new PlayerCard("TN", "Titan", 4, 3, 10), //4 mana, 3 attack, 10 HP.
+        new PlayerCard("CC", "Caco", 5, 4, 6), //5 mana, 4 attack, 6 HP.
+        new PlayerCard("DL", "Dark Lord", 6, 6, 8) //6 mana, 6 attack, 8 HP.
     };
 
     
@@ -68,7 +68,7 @@ public class Deck extends CardCollection
         {
             for (Card card : cardArray)
             {
-                super.add(new Card(card));
+                super.add(new PlayerCard(card));
             }
         }
     }

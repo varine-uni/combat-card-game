@@ -27,10 +27,10 @@ public class Class_Netrunner extends Player
      */
     public final Card[] NETRUNNER_CARDS = new Card[] 
     {
-        new Card("HR", "Hacker", 2, 4, 1, 2), //2 mana, 4 attack, 1 HP, 2 cybernetic slots.
-        new Card("RR", "Runner", 3, 3, 3, 3), //3 mana, 3 attack, 3 HP, 3 cybernetic slot.s
-        new Card("SR", "Sector", 4, 4, 5, 5), //4 mana, 4 attack, 5 HP, 5 cybernetic slots.
-        new Card("SN", "SHODAN", 10, 10, 10, 4) //10 mana, 10 attack, 10 HP, 4 cybernetic slots.
+        new PlayerCard("HR", "Hacker", 2, 4, 1), //2 mana, 4 attack, 1 HP.
+        new PlayerCard("RR", "Runner", 3, 3, 3), //3 mana, 3 attack, 3 HP.
+        new PlayerCard("SR", "Sector", 4, 4, 5), //4 mana, 4 attack, 5 HP.
+        new PlayerCard("SN", "SHODAN", 10, 10, 10) //10 mana, 10 attack, 10 HP.
     }; 
     
     /**

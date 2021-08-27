@@ -71,6 +71,12 @@ public class GameLogic
     }
     
     
+    /**
+     * Basically the main action menu. The player can end their turn, play a card, attack the player
+     * or place a card from their hand onto the table.
+     * @param player    Player reference to access card collections.
+     * @param enemy     Enemy reference to access card collections.
+     */
     public void menu(Player player, Player enemy)
     {
         while (true)
@@ -92,7 +98,8 @@ public class GameLogic
                     break;
                     
                 case 3:
-                    
+                    useHand(player);
+                    break;
                     
                 case 4:
                     return; //End turn.
@@ -101,6 +108,11 @@ public class GameLogic
     }
     
     
+    /**
+     * The attack methods for damaging an enemy player via selected card.
+     * @param player    Player reference to access cards.
+     * @param enemy     Enemy reference to deal damage to.
+     */
     public void attackSequencePlayer(Player player, Player enemy)
     {
         //Player selects their card before the attack sequence begins.
@@ -226,8 +238,16 @@ public class GameLogic
             //You can only upgrade cards that are in your hand.
             System.out.println("Please select a card to upgrade.");
             player.getHand().toString();
-            Upgradeable selectedCard = player.getHand().getCards().get(newInput.nextInt());
-            selectedCard = new Cybernetics(selectedCard);
+            
+            Card c = new PlayerCard("IP", "Imp", 1, 1, 1);
+            System.out.println(c.getAttack());
+            c = new Cybernetic(c);
+            System.out.println(c.getAttack());
+            player.placeCard(c);
+            System.out.println(c.getId());
+            //Shows enemies cards.
+            c.toString();
+            
         }
         else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
         {
@@ -237,11 +257,22 @@ public class GameLogic
         return true;
     }
     
+    /**
+     * Check player's hand and allow selection to place on Table.
+     * @param player    The current player's reference for access of card collections.
+     */
     public void useHand(Player player)
     {
-        System.out.println("Select a card from your hand, and place it on the table.");
+        System.out.println("Select a card from your hand, and place it on the table.\n");
         
+        //Shows your cards.
+        for (int i = 0; i < player.getHand().getCards().size(); i++)
+        {
+            //The (i+1)+"." is just indexing each card in the loop starting from 1.
+            System.out.println((i + 1) + "." + player.getHand().getCards().get(i).toString());
+        }
         
+        player.placeCard(player.getHand().getCard(checkPlayerInput(player.getHand().count()) - 1));
     }
     
     /**

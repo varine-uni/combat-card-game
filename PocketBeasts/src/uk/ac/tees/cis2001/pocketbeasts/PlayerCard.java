@@ -17,14 +17,31 @@
 package uk.ac.tees.cis2001.pocketbeasts;
 
 /**
+ *
  * @author w9101532
- * 
- * This interface sets up the decorator.
- * Methods define what's upgradable.
  */
-public interface Upgradeable
+public class PlayerCard extends Card
 {
-    public int getAttack();
+    public PlayerCard(String id, String name, int manaCost, int attack, int health)
+    {
+        this.id = id;
+        this.name = name;
+        this.manaCost = manaCost;
+        this.attack = attack;
+        this.health = health;
+    }
     
-    public int getHealth();
+    public PlayerCard(Card card)
+    {
+        this.id = card.id;
+        this.name = card.name;
+        this.manaCost = card.manaCost;
+        this.attack = card.attack;
+        this.health = card.health;
+    }
+    
+    public PlayerCard()
+    {
+        
+    }
 }
