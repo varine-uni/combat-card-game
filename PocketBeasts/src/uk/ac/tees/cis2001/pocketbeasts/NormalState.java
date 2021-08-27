@@ -34,6 +34,7 @@ public class NormalState implements WarriorState, WarObserver
         {
             System.out.println("Warrior is feeling normal.");
             war.setState(this);
+            war.setStrategy(null);
         }
     }
 

@@ -67,11 +67,15 @@ public class Class_CyberWarrior extends Player implements WarSubject
     }
     
     /**
-     * Executes the current strategy.
+     * Executes the current strategy. In the case for this class this will be every
+     * time the Warrior receives a hit.
      */
     public void executeStrategy()
     {
-        strategy.activateStrategy(this);
+        if (strategy != null)
+        {
+           strategy.activateStrategy(this); 
+        }
     }
     
     /**
@@ -104,6 +108,7 @@ public class Class_CyberWarrior extends Player implements WarSubject
         this.health -= amount;
         
         this.notifyUpdate(this); //Notifies the available states to check if warrior should enter a state.
+        this.executeStrategy(); //Executes the rage/berserk abilities if they are currently set.
         
         return health <= 0;
     }

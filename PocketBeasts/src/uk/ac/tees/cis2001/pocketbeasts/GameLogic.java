@@ -130,6 +130,7 @@ public class GameLogic
 
             System.out.println(player.getName() + " strikes " + enemy.getName()
                     + " for " + player.getSelectedCard().getAttack() + " damage.");
+            System.out.println(enemy.getName() + " now has (" + enemy.getHealth() + ") HP.\n");
         } 
         else
         {
