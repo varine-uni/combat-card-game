@@ -28,10 +28,11 @@ public class Player
 {
     //Player attribrutes.
     private final int MAX_MANA = 10;
-    private final String name;
-    private int manaAvailable;
-    private int currentMaxMana;
-    private int health;
+    private final int MAX_HEALTH = 20;
+    protected final String name;
+    protected int manaAvailable;
+    protected int currentMaxMana;
+    protected int health;
     
     private Card selectedCard;
 
@@ -46,7 +47,7 @@ public class Player
         this.name = name;
         this.manaAvailable = 0;
         this.currentMaxMana = 1;
-        this.health = 15;
+        this.health = 20;
         this.deck = new Deck();
         this.hand = new Hand();
         this.table = new Table();
@@ -187,12 +188,31 @@ public class Player
     }
     
     /**
+     * Gets the max HP of player.
+     * @return  Returns the value of max HP of player.
+     */
+    public int getMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+    
+    /**
      * Places chosen card onto the table.
      * @param card  Selected card.
      */
     public void placeCard(Card card)
     {
         this.table.add(card);
+    }
+    
+    /**
+     * Replaces a card via the index and a card object in hand.
+     * @param card      Card object to replace with.
+     * @param index     Where to replace card.
+     */
+    public void replaceInHand(Card card, int index)
+    {
+        getHand().getCards().set(index, card);
     }
     
     /**
@@ -207,7 +227,6 @@ public class Player
         
         return health <= 0;
     }
-
     
     /**
      * Death of this player. Other player wins and the game ends.

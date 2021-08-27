@@ -24,34 +24,58 @@ public abstract class CyberneticDecorator extends Card
 {
     protected Card card;
     
+    /**
+     * Constructor.
+     * @param card  Takes in a card parameter and sets it in the global variable.
+     */
     public CyberneticDecorator(Card card)
     {
         this.card = card;
     }
     
+    /**
+     * Gets health.
+     * @return  Returns the health value plus the wrapper.
+     */
     @Override
     public int getHealth()
     {
         return card.getHealth() + health;
     }
     
+    /**
+     * Gets attack.
+     * @return  Returns the attack value plus the wrapper.
+     */
     @Override
     public int getAttack()
     {
         return card.getAttack() + attack;
     }
     
+    /**
+     * Gets the name.
+     * @return  Returns the name plus the wrapper.
+     */
     @Override
     public String getName()
     {
         return card.getName() + name;
     }
     
+    /**
+     * Gets ID.
+     * @return  Returns the ID value plus the wrapper.
+     */
     public String getID()
     {
         return card.getId() + id;
     }
     
+    /**
+     * Gets mana cost.
+     * @return  Returns the mana value plus the wrapper.
+     */
     @Override
     public int getManaCost()
     {

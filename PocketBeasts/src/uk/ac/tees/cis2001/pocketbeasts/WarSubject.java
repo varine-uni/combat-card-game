@@ -20,22 +20,11 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Cybernetic extends CyberneticDecorator
+public interface WarSubject
 {
     /**
-     * Basic decorator object that simply buffs the attack and health of a player's card.
-     * Increases the cost of the card by 1 mana point.
-     * @param card     Card object to wrap around.
+     * Notifies the observers on change.
+     * @param war   The Cyber Warrior player.
      */
-    public Cybernetic(Card card)
-    {
-        super(card);
-        
-        attack = 10;
-        health = 10;
-        id = "+";
-        name = "";
-        manaCost = 1;
-    }
-    
+    public void notifyUpdate(Class_CyberWarrior war);
 }

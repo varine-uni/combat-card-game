@@ -20,22 +20,31 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Cybernetic extends CyberneticDecorator
+public class NormalState implements WarriorState, WarObserver
 {
+
     /**
-     * Basic decorator object that simply buffs the attack and health of a player's card.
-     * Increases the cost of the card by 1 mana point.
-     * @param card     Card object to wrap around.
+     * Changes the state based on the condition.
+     * @param war   The Cyber Warrior player.
      */
-    public Cybernetic(Card card)
+    @Override
+    public void action(Class_CyberWarrior war)
     {
-        super(card);
-        
-        attack = 10;
-        health = 10;
-        id = "+";
-        name = "";
-        manaCost = 1;
+        if (war.getHealth() > war.getMaxHealth() / 2)
+        {
+            System.out.println("Warrior is feeling normal.");
+            war.setState(this);
+        }
+    }
+
+    /**
+     * Calls the state's action to check whether to change states or not. (All state objects receive this call).
+     * @param war   The Cyber Warrior player.
+     */
+    @Override
+    public void update(Class_CyberWarrior war)
+    {
+        action(war);
     }
     
 }

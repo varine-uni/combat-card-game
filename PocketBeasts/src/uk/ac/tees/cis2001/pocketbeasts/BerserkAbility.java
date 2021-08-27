@@ -20,22 +20,15 @@ package uk.ac.tees.cis2001.pocketbeasts;
  *
  * @author w9101532
  */
-public class Cybernetic extends CyberneticDecorator
+public class BerserkAbility implements WarriorStateStrategy
 {
     /**
-     * Basic decorator object that simply buffs the attack and health of a player's card.
-     * Increases the cost of the card by 1 mana point.
-     * @param card     Card object to wrap around.
+     * Uses the chosen strategy. This strategy heals the Cyber Warrior for one point in the berserk state.
+     * @param war   Cyber Warrior object for use with strategies. (I.e access to health or attack).
      */
-    public Cybernetic(Card card)
+    @Override
+    public void activateStrategy(Class_CyberWarrior war)
     {
-        super(card);
-        
-        attack = 10;
-        health = 10;
-        id = "+";
-        name = "";
-        manaCost = 1;
+        war.health += 1;
     }
-    
 }

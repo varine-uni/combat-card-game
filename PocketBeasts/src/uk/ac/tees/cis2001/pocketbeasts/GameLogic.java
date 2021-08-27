@@ -220,41 +220,53 @@ public class GameLogic
     /**
      * Add cybernetics to player's cards.
      * @param player    Player whose cards will be modified.
-     * @return          Returns false if exit. Returns true if successful.
+     * @return          Returns false if exit. 
      */
     public boolean cardBuilderInterface(Player player)
     {
-        System.out.println("Choose from the following options.");
-        System.out.println("1. Add cybernetics\n2. Exit");
-        Scanner newInput = new Scanner(System.in);
-        
-        //Choice 1 is to add cybernetics.
-        if (checkPlayerInput(2) == 1) 
-        {   
-            //Clear buffer.
-            newInput.reset(); 
-            
-            //Select card from hand.
-            //You can only upgrade cards that are in your hand.
-            System.out.println("Please select a card to upgrade.");
-            player.getHand().toString();
-            
-            Card c = new PlayerCard("IP", "Imp", 1, 1, 1);
-            System.out.println(c.getAttack());
-            c = new Cybernetic(c);
-            System.out.println(c.getAttack());
-            player.placeCard(c);
-            System.out.println(c.getId());
-            //Shows enemies cards.
-            c.toString();
-            
-        }
-        else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
+        while (true)
         {
-            return false;
+            System.out.println("Choose from the following options.");
+            System.out.println("1. Add cybernetics\n2. Exit");
+            Scanner newInput = new Scanner(System.in);
+
+            //Choice 1 is to add cybernetics.
+            if (checkPlayerInput(2) == 1)
+            {
+                //Clear buffer.
+                newInput.reset();
+
+                //Select card from hand.
+                //You can only upgrade cards that are in your hand.
+                System.out.println("Please select a card to upgrade.");
+                
+                //Shows player's hand.
+                for (int i = 0; i < player.getHand().getCards().size(); i++)
+                {
+                    //The (i+1)+"." is just indexing each card in the loop starting from 2 (since 1. is taken by the enemy player).
+                    System.out.println((i + 1) + "." + player.getHand().getCards().get(i).toString());
+                }
+                
+                int choice = checkPlayerInput(player.getHand().count() - 1);
+                Card c = player.getHand().getCard(choice);
+                c = new Cybernetic(c);
+                player.replaceInHand(c, choice);
+                
+                //Shows player's hand.
+                for (int i = 0; i < player.getHand().getCards().size(); i++)
+                {
+                    //The (i+1)+"." is just indexing each card in the loop starting from 2 (since 1. is taken by the enemy player).
+                    System.out.println((i + 1) + "." + player.getHand().getCards().get(i).toString());
+                }
+                
+                return true;
+                
+            } 
+            else if (checkPlayerInput(2) == 2) //Choice 2 is go back.
+            {
+                return false;
+            }
         }
-        
-        return true;
     }
     
     /**

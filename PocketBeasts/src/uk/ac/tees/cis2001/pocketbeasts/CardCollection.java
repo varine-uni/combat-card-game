@@ -25,49 +25,87 @@ import java.util.Collections;
  */
 public class CardCollection
 {
+    /**
+     * Contains the cards for the collection.
+     */
     private final ArrayList<Card> cards;
 
+    /**
+     * Constructor.
+     */
     public CardCollection()
     {
         this.cards = new ArrayList<>();
     }
 
+    /**
+     * Gets the arraylist associated with the collection.
+     * @return 
+     */
     public ArrayList<Card> getCards()
     {
         return this.cards;
     }
 
+    /**
+     * Gets the selected card at index.
+     * @param index     The index to locate the card.
+     * @return          Returns the card object.
+     */
     public Card getCard(int index)
     {
         return cards.get(index);
     }
     
+    /**
+     * Adds a card to the collection.
+     * @param card     The card to be added.
+     */
     public void add(Card card)
     {
         this.cards.add(card);
         this.sort();
     }
     
+    /**
+     * Removes a card from the collection.
+     * @param card      Card to remove.
+     */
     public void remove(Card card)
     {
         this.cards.remove(card);
     }
 
+    /**
+     * Removes all cards in the collection.
+     * @param cards     Takes in an ArrayList of cards.
+     */
     public void removeAll(ArrayList<Card> cards)
     {
         this.cards.removeAll(cards);
     }
 
+    /**
+     * Gets the collection's size.
+     * @return    Returns the size of the collection.
+     */
     public int count()
     {
         return this.cards.size();
     }
 
+    /**
+     * Sorts the collection.
+     */
     public void sort()
     {
         Collections.sort(this.cards);
     }
 
+    /**
+     * Displays visually the card collection object.
+     * @return      Returns the string built via this method.
+     */
     @Override
     public String toString()
     {
