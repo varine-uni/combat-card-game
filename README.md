@@ -1,2 +1,2 @@
-# pocket_beasts_card_game
+# combat-card-game
 Card game project for one of my software engineering modules
